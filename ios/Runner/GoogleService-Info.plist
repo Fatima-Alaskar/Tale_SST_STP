@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>993339851101-k0jqqcmmkld4ct3oj3b8fga5ad05t0vv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.993339851101-k0jqqcmmkld4ct3oj3b8fga5ad05t0vv</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>993339851101-805v90tlm2euntqm75i7gqo8dpmtq8i9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAyTW0ndghZvfQnuTR5QxXWyRUYFpCLEVs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>993339851101</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.taleteller</string>
+	<key>PROJECT_ID</key>
+	<string>taleteller-3a7b8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>taleteller-3a7b8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:993339851101:ios:ac95e07d583ce70d42e8b4</string>
+	<key>DATABASE_URL</key>
+	<string>https://taleteller-3a7b8-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
