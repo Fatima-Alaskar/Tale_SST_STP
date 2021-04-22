@@ -363,6 +363,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 bottom: 25,
                 left: 0
+            ),
+            //TODO: check if it working?
+            Positioned.fill(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                      width: screenWidth / 3 * 2,
+                      height: 50,
+                      child: FlatButton(child: Text("Don't have an account?"), onPressed: (){
+                         SchedulerBinding.instance.addPostFrameCallback((_) {
+
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              '/SignUpPage', (Route<dynamic> route) => false);
+                        });
+                      }, )
+                  ),
+                ),
+                bottom: 25,
+                left: 0
             )
           ],
           alignment: Alignment.topCenter,

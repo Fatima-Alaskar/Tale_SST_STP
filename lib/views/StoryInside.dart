@@ -7,11 +7,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/scheduler.dart';
 
 
-class Home extends StatefulWidget {
+class StoryInside extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _StoryInsideState createState() => _StoryInsideState();
 }
-class _HomeState extends State<Home> {
+class _StoryInsideState extends State<StoryInside> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 

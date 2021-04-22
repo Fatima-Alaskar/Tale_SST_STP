@@ -28,8 +28,9 @@ class _HomeState extends State<Home> {
             )
         ),
 
-    child: Column(
-      children: [
+
+        child: Column(
+        children: [
         Center(
             child: Ink(
             decoration: const ShapeDecoration(
@@ -37,16 +38,16 @@ class _HomeState extends State<Home> {
             shape: CircleBorder(),
           ),
 
-          child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-          Expanded(
-          child: Icon(Icons.favorite,
-          color: Colors.white),
-          ),
-            Expanded(
-            child: Icon(Icons.addchart_rounded,
-            color: Colors.white)),
+             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children:  <Widget> [
+              Expanded(
+                child: Icon(Icons.favorite,
+                 color: Colors.white),
+              ),
+              Expanded(
+              child: Icon(Icons.addchart_rounded,
+              color: Colors.white)),
 
           ],),
         ),
@@ -54,24 +55,34 @@ class _HomeState extends State<Home> {
 
         SizedBox(),
 
-       Column(
+         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
             Expanded(
+            child: FlatButton(
+             onPressed: (){
+               Navigator.pushNamed(context, '/HomePage');
+
+             },
               child: Image(image: AssetImage("assets/images/ypung.png")),
-            ),
+
+            ),),
             Expanded(
-              child: Image(image: AssetImage("assets/images/pre.png")),
+            child: FlatButton(
+             onPressed: (){
+               Navigator.pushNamed(context, '/Page');
+
+
+             },
+             child: Image(image: AssetImage("assets/images/pre.png")),
             ),
-          ],),
-      ],
+          ),
+    ],
+
     ),
-
-
-
-
-    )
+    ],),
+    ),
     );
 
   }
