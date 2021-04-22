@@ -103,15 +103,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           storyWidgetsList.length > 0 ? Stories : Text(" "),
-          // dummyGridView
-          // GridView.count(
-          //   crossAxisCount: 2,
-          //   scrollDirection: Axis.vertical,
-          //   shrinkWrap: true,
-          //   children: [
-          //     Text("Test"),
-          //     Text("Test"),
-          //   ],),
+
         ],
       ),
     );
@@ -119,7 +111,7 @@ class _HomePageState extends State<HomePage> {
 
   getStories() {
     FirebaseFirestore.instance
-        .collection('Story')
+        .collection("UserStory")
         .snapshots()
         .listen((documentSnapshot) => setState((){
 

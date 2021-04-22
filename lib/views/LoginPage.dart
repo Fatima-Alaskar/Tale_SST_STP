@@ -399,7 +399,7 @@ class _LoginPageState extends State<LoginPage> {
             );
 
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/HomePage', (Route<dynamic> route) => false);
+                '/Page', (Route<dynamic> route) => false);
           });
         // }else{
         //   Fluttertoast.showToast(

@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/HomePage': (BuildContext context) => HomePage(),
@@ -93,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     onPressed: (){
                       SchedulerBinding.instance.addPostFrameCallback((_) {
-
+                        //here we can change
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             '/SignUpPage', (Route<dynamic> route) => false);
                       });

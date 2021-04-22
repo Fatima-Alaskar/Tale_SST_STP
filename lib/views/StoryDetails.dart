@@ -111,18 +111,6 @@ class _StoryDetailsState extends State<StoryDetails> {
 
     ocrText = ocrText + visionText.text;
 
-    // setState(() {
-    //   lines.add(Text(text));
-    // });
-    // setState(() {
-    //   body = SingleChildScrollView(
-    //     child: Padding(
-    //       padding: const EdgeInsets.all(8.0),
-    //       child: Text(ocrText, softWrap: true, overflow: TextOverflow.visible,),
-    //     ),
-    //   );
-    //   lines = [];
-    // });
 
     String lineText = "";
 
@@ -132,13 +120,6 @@ class _StoryDetailsState extends State<StoryDetails> {
       final String text = block.text;
       final List<RecognizedLanguage> languages = block.recognizedLanguages;
 
-      // saveStoryPageText(text);
-
-      // setState(() {
-      //   lines.add(Text(text));
-      //   // print(text);
-      //   // refreshData();
-      // });
 
 
 
@@ -147,9 +128,7 @@ class _StoryDetailsState extends State<StoryDetails> {
         for (TextElement element in line.elements) {
           lineText = lineText + " " + element.text;
         }
-        // setState(() {
-        //   lines.add(Text(lineText));
-        // });
+
       }
 
 
