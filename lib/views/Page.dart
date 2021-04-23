@@ -13,7 +13,7 @@ import '../models/Story.dart';
 import 'StoryDetails.dart';
 import 'ViewStory.dart';
 import 'StoryInside.dart';
-
+import 'SearchStory.dart';
 
 class Storys extends StatefulWidget {
   @override
@@ -48,8 +48,24 @@ class _StorysState extends State<Storys> {
                         image: AssetImage("assets/images/home-bg.png"),
                         fit: BoxFit.cover
                     )
+
                 ),
-                child: StreamBuilder(
+
+                child: Column(
+                  children: [
+                    IconButton(
+                      alignment: Alignment.center,
+                      icon: Icon(
+                        Icons.search,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SearchPage()),
+                        );
+                      },
+                    ),
+                    StreamBuilder(
                     stream: FirebaseFirestore.instance.collection('Story')
                         .snapshots(),
                     builder: (context, snapshots) {
@@ -109,6 +125,8 @@ class _StorysState extends State<Storys> {
                           }); //}
                       //return Text("add something");
                     }),
+                  ],
+                ),
 
               )
           );
