@@ -1,6 +1,7 @@
-class Story {
+class UserStory {
   String id, title, category, language;
-
   int educationalLevel;
-  Story();
+
+  UserStory();
+
 }

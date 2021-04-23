@@ -81,7 +81,8 @@ class _StorysState extends State<Storys> {
                           new SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2),
                           shrinkWrap: true,
-                          itemCount: snapshots.data.documents.length,
+                          itemCount: snapshots.data.docs.length,
+                          //snapshots.data.documents.length,
                           itemBuilder: (context, index) {
                             //DocumentSnapshot documentSnapshot=snapshots.data;
                             return Dismissible(
@@ -97,7 +98,7 @@ class _StorysState extends State<Storys> {
                                     borderRadius: BorderRadius.circular(8)),
                                 child: ListTile(
                                   title: Text(
-                                    snapshots.data["Title"][index],
+                                    snapshots.data[index]["Title"], // maybe wrong
                                     textAlign: TextAlign.right,
                                   ),
                                   /*trailing: IconButton(
@@ -110,13 +111,13 @@ class _StorysState extends State<Storys> {
                               },
                             ),*/
                                   trailing: Image.network(
-                                    snapshots.data["img"][index].Images,
+                                    snapshots.data[index]["img"],
                                   ),
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => StoryInside()),
+                                          builder: (context) => ViewStory(snapshots.data[index].toString())),
                                     );
                                   },
                                 ),

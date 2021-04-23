@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 
 import '../Global.dart';
 
@@ -20,6 +23,10 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _educationLevelController = TextEditingController();
+  final collRef = FirebaseFirestore.instance.collection('Userinfo');
+
+
+
 
 
   @override
@@ -156,8 +163,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                   padding: const EdgeInsets.only(left: 8),
                                   child: TextFormField(
                                     controller: _ageController,
-                                    // obscureText: true,
-                                    validator: (String value) {
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                   validator: (String value) {
                                       if (value.isEmpty) return 'Please enter some text';
                                       return null;
                                     },
@@ -340,6 +350,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           if (_formKey.currentState.validate()) {
                             await _signUpWithEmailAndPassword();
+
+
                           }
 
                           // SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -389,6 +401,15 @@ class _SignUpPageState extends State<SignUpPage> {
 
 
       if(user != null){
+
+        DocumentReference documentReference = collRef.doc(user.uid);
+
+
+        documentReference.set({
+          'Username': _usernameController.text,
+          'Age': _ageController.value,
+
+        });
         // Navigator.pushNamed(context, "/HomePage");
         // await Global.auth.currentUser.updateProfile(displayName: _nameController.text);
 
@@ -407,7 +428,7 @@ class _SignUpPageState extends State<SignUpPage> {
         SchedulerBinding.instance.addPostFrameCallback((_) {
 
           Navigator.of(context).pushNamedAndRemoveUntil(
-              '/HomePage', (Route<dynamic> route) => false);
+              '/Home', (Route<dynamic> route) => false);
         });
       }else{
         Fluttertoast.showToast(
@@ -439,5 +460,6 @@ class _SignUpPageState extends State<SignUpPage> {
 //      );
     }
   }
+
 
 }

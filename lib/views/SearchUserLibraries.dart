@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'ViewStory.dart';
+import 'StoryInside.dart';
 
 
 class SearchPage extends StatefulWidget {
@@ -36,29 +37,28 @@ class _SearchPageState extends State<SearchPage> {
       body: StreamBuilder<QuerySnapshot>(
         stream: (title != "" && title != null)
             ? FirebaseFirestore.instance
-            .collection('Story')
+            .collection("UserStory")
             .where("searchKeywords", arrayContains: title)
             .snapshots()
-            : FirebaseFirestore.instance.collection("Story").snapshots(),
+            : FirebaseFirestore.instance.collection("UserStory").snapshots(),
         builder: (context, snapshot) {
           return (snapshot.connectionState == ConnectionState.waiting)
               ? Center(child: CircularProgressIndicator())
-
               : ListView.builder(
-             itemCount: snapshot.data.docs.length,
-             itemBuilder: (context, index) {
+            itemCount: snapshot.data.docs.length,
+            itemBuilder: (context, index) {
               DocumentSnapshot data = snapshot.data.docs[index];
               return Card(
-              elevation: 4,
-              margin: EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8)),
-              child: ListTile(
-              title: Text(
-                snapshot.data.docs[index]["Title"], // The crrect..
-              textAlign: TextAlign.right,
-              ),
-              /*trailing: IconButton(
+                elevation: 4,
+                margin: EdgeInsets.all(8),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                child: ListTile(
+                  title: Text(
+                    snapshot.data.docs[index]["Title"],
+                    textAlign: TextAlign.right,
+                  ),
+                  /*trailing: IconButton(
                               icon: Icon(Icons.delete),
                               onPressed: () {
                                 setState(() {
@@ -67,17 +67,17 @@ class _SearchPageState extends State<SearchPage> {
                                 });
                               },
                             ),*/
-              trailing: Image.network(
-              snapshot.data.docs[index]["img"],
-              ),
-              onTap: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(
-              builder: (context) => ViewStory(snapshot.data.docs[index].toString())),
-              );
-              },
-              ),
+                  trailing: Image.network(
+                    snapshot.data.docs[index]["img"],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StoryInside()),
+                    );
+                  },
+                ),
               );
             },
           );

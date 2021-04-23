@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'views/NewStory.dart';
 import 'views/LoginPage.dart';
 import 'views/SignUpPage.dart';
-import 'views/HomePage.dart';
+import 'views/YoungHome.dart';
 import 'views/ProfilePage.dart';
 import 'package:firebase_core/firebase_core.dart';
 

@@ -338,10 +338,10 @@ class _ProfilePageState extends State<ProfilePage> {
           getBodyToProfilePage();
           break;
         case 1:
-          getBodyToHomePage();
+       //TODO: //  getBodyToHomePage();
           break;
         case 2:
-          getBodyToLogout();
+        //  getBodyToLogout();
           break;
       }
 

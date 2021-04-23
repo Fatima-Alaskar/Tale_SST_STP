@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -7,14 +8,13 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:image_picker/image_picker.dart';
 
-import '../models/Story.dart';
-
+import '../models/UserStory.dart';
 class StoryPage extends StatefulWidget {
   String storyPageID;
-  Story currentStory;
+  UserStory currentStory;
 
 
-  StoryPage.story(String storyID, Story currentStory){
+  StoryPage.UserStory(String storyID, UserStory currentStory){
 
     // print("story object: " +currentStory.title);
 
@@ -25,7 +25,7 @@ class StoryPage extends StatefulWidget {
   }
 
   @override
-  _StoryPageState createState() => _StoryPageState.story(storyPageID, currentStory);
+  _StoryPageState createState() => _StoryPageState.UserStory(storyPageID, currentStory);
 }
 
 enum TtsState { playing, stopped, paused, continued }
@@ -36,7 +36,7 @@ class _StoryPageState extends State<StoryPage> {
   double screenWidth;
 
   String storyPageID;
-  Story currentStory;
+  UserStory currentStory;
 
   String pageText = " ";
   String sstText = " ";
@@ -54,7 +54,7 @@ class _StoryPageState extends State<StoryPage> {
   FlutterTts flutterTts = FlutterTts();
   TtsState ttsState = TtsState.stopped;
   
-  _StoryPageState.story(String storyID, Story currentStory){
+  _StoryPageState.UserStory(String storyID, UserStory currentStory){
     this.storyPageID = storyID;
     this.currentStory = currentStory;
 

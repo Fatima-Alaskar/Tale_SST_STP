@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ViewStory extends StatefulWidget {
+  String id;
+
+  ViewStory (this.id);
   @override
-  _ViewStoryState createState() => _ViewStoryState();
+  _ViewStoryState createState() => _ViewStoryState(this.id);
 }
 
 class _ViewStoryState extends State<ViewStory> {
   double screenHeight;
   double screenWidth;
+  String id;
+  _ViewStoryState(this.id);
 
   @override
   Widget build(BuildContext context) {

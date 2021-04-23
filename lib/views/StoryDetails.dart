@@ -5,15 +5,16 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../models/Story.dart';
+import '../models/UserStory.dart';
+
 import 'StoryPage.dart';
 
 class StoryDetails extends StatefulWidget {
   String storyID;
-  Story currentStory;
+  UserStory currentStory;
 
 
-  StoryDetails.story(String storyID, Story currentStory){
+  StoryDetails.Userstory(String storyID, UserStory currentStory){
 
     // print("story object: " +currentStory.title);
 
@@ -25,7 +26,7 @@ class StoryDetails extends StatefulWidget {
 
 
   @override
-  _StoryDetailsState createState() =>  _StoryDetailsState.story(storyID, currentStory);
+  _StoryDetailsState createState() =>  _StoryDetailsState.UserStory(storyID, currentStory);
 }
 
 class _StoryDetailsState extends State<StoryDetails> {
@@ -34,7 +35,7 @@ class _StoryDetailsState extends State<StoryDetails> {
   double screenWidth;
 
   String storyID;
-  Story currentStory;
+  UserStory currentStory;
   String ocrText = "";
 
   List<Widget> lines = new List();
@@ -44,7 +45,7 @@ class _StoryDetailsState extends State<StoryDetails> {
 
   Widget StoryPages;
 
-  _StoryDetailsState.story(String storyID, Story currentStory){
+  _StoryDetailsState.UserStory(String storyID, UserStory currentStory){
     this.storyID = storyID;
     this.currentStory = currentStory;
 
@@ -202,7 +203,7 @@ class _StoryDetailsState extends State<StoryDetails> {
             ),
                 onTap: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (BuildContext context) => StoryPage.story(fireBaseDocument.id,currentStory)));
+                      MaterialPageRoute(builder: (BuildContext context) => StoryPage.UserStory(fireBaseDocument.id,currentStory)));
                 },
           );
           storyPageWidgetsList.add(storyPageWidget);
@@ -238,7 +239,7 @@ class _StoryDetailsState extends State<StoryDetails> {
     }).whenComplete(() => {
       // print("story object: " +currentStory.title)
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.story(documentReference.id,currentStory))),
+          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.Userstory(documentReference.id,currentStory))),
       // print("Document ID: "+documentReference.id),
       // print("test")
     });

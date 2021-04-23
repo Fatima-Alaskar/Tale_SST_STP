@@ -1,16 +1,29 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 class _HomeState extends State<Home> {
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   double screenHeight;
   double screenWidth;
+
+  User user;
+
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = await _auth.currentUser;
+      }
+
 
 
   @override
@@ -62,16 +75,21 @@ class _HomeState extends State<Home> {
             Expanded(
             child: FlatButton(
              onPressed: (){
-               Navigator.pushNamed(context, '/HomePage');
 
-             },
+               if (ValidAge()){
+               Navigator.pushNamed(context, '/YoungHome');
+
+             }
+               else {
+              AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}
+    },
               child: Image(image: AssetImage("assets/images/ypung.png")),
 
             ),),
             Expanded(
             child: FlatButton(
              onPressed: (){
-               Navigator.pushNamed(context, '/Page');
+               Navigator.pushNamed(context, '/preschoolerHome');
 
 
              },
@@ -85,8 +103,29 @@ class _HomeState extends State<Home> {
     ),
     );
 
+
   }
-}
+
+
+  bool ValidAge(){
+    var age;
+   FirebaseFirestore.instance.collection('Userinfo').doc(user.uid).get().then((value) {
+     setState(() {
+       age=double.parse(value.data()["Age"]);
+
+
+     });
+   });
+ if (age >5.9) {
+   return true;
+ }
+ else return false;
+    }
+
+
+  }
+
+
 
 
 

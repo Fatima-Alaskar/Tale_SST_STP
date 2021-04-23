@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tale_teller/views/LoginPage.dart';
 import 'ProfilePage.dart';
-import 'HomePage.dart';
+import 'YoungHome.dart';
 import 'LoginPage.dart';
 import '../Global.dart';
 

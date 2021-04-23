@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../models/Story.dart';
+//import '../models/Story.dart';
+import '../models/UserStory.dart';
 
 import 'StoryDetails.dart';
 
@@ -229,7 +230,7 @@ class _NewStoryState extends State<NewStory> {
       print(e);
     }
 
-    Story currentStory = new Story();
+    UserStory currentStory = new UserStory();
     currentStory.title = _titleController.text;
     currentStory.category = _categoryController.text;
     currentStory.language = _languageController.text;
@@ -247,7 +248,7 @@ class _NewStoryState extends State<NewStory> {
     }).whenComplete(() => {
     // print("story object: " +currentStory.title)
     Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.story(documentReference.id,currentStory))),
+          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.Userstory(documentReference.id,currentStory))),
       // print("Document ID: "+documentReference.id),
       // print("test")
     });

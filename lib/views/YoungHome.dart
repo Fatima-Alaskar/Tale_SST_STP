@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import '../Global.dart';
 import '../models/Story.dart';
 import 'StoryDetails.dart';
+import '../models/UserStory.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
       storyWidgetsList = [];
 
           for(QueryDocumentSnapshot fireBaseDocument in  documentSnapshot.docs){
-            Story story = new Story();
+            UserStory story = new UserStory();
             story.id = fireBaseDocument.id;
             story.title = fireBaseDocument.data()["Title"];
             story.category = fireBaseDocument.data()["Category"];
@@ -171,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                     )),
                 onTap: (){
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) => StoryDetails.story(story.id,story)));
+                      MaterialPageRoute(builder: (BuildContext context) => StoryDetails.Userstory(story.id,story)));
                 },
               );
               storyWidgetsList.add(storyWidget);
