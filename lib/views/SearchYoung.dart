@@ -4,12 +4,12 @@ import 'ViewStory.dart';
 import 'StoryInside.dart';
 
 
-class SearchPage extends StatefulWidget {
+class SearchYoung extends StatefulWidget {
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchYoungState createState() => _SearchYoungState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchYoungState extends State<SearchYoung> {
   String title = "";
 
   @override

@@ -361,17 +361,16 @@ class _LoginPageState extends State<LoginPage> {
                       }, )
                   ),
                 ),
-                bottom: 25,
+                bottom: 0,
                 left: 0
             ),
-            //TODO: check if it working?
             Positioned.fill(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: SizedBox(
                       width: screenWidth / 3 * 2,
                       height: 50,
-                      child: FlatButton(child: Text("Don't have an account?"), onPressed: (){
+                      child: FlatButton(child: Text("Create account"), onPressed: (){
                          SchedulerBinding.instance.addPostFrameCallback((_) {
 
                           Navigator.of(context).pushNamedAndRemoveUntil(
@@ -418,7 +417,7 @@ class _LoginPageState extends State<LoginPage> {
             );
 
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/Page', (Route<dynamic> route) => false);
+                '/Home', (Route<dynamic> route) => false);
           });
         // }else{
         //   Fluttertoast.showToast(

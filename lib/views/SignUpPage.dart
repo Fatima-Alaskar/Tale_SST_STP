@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _educationLevelController = TextEditingController();
-  final collRef = FirebaseFirestore.instance.collection('Userinfo');
+  final collRef = FirebaseFirestore.instance.collection("Userinfo");
 
 
 
@@ -58,7 +58,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Sign UP",style: TextStyle(fontSize: 28, color: Colors.white),)
+                              Text("Sign up",style: TextStyle(fontSize: 28, color: Colors.white),)
                             ],
                           ),
                           SizedBox(height: 20,),
@@ -124,7 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 controller: _passwordController,
                                 obscureText: true,
                                 validator: (String value) {
-                                  if (value.isEmpty) return 'Please enter some text';
+                                  if (value.isEmpty) return 'Please enter your password';
                                   return null;
                                 },
                                 decoration: InputDecoration(
@@ -168,7 +168,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                    validator: (String value) {
-                                      if (value.isEmpty) return 'Please enter some text';
+                                      if (value.isEmpty) return 'Please enter your age in numbers only';
                                       return null;
                                     },
                                     decoration: InputDecoration(
@@ -178,6 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       errorBorder: InputBorder.none,
                                       disabledBorder: InputBorder.none,
                                       labelText: 'Age',
+
                                       // labelStyle: TextStyle(color: Colors.white),
                                       // enabledBorder: UnderlineInputBorder(
                                       //   borderSide: BorderSide(color: Colors.white),
@@ -209,7 +210,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       controller: _educationLevelController,
                                       // obscureText: true,
                                       validator: (String value) {
-                                        if (value.isEmpty) return 'Please enter some text';
+                                        if (value.isEmpty) return 'Please enter your educational level';
                                         return null;
                                       },
                                       decoration: InputDecoration(
@@ -341,7 +342,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: screenWidth / 3 * 2,
                     height: 50,
                     child: RaisedButton(
-                        child: Text("Sign UP", style: TextStyle(color: Colors.white),),
+                        child: Text("Sign up", style: TextStyle(color: Colors.white),),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0), ),
                         color: Color(0xFF185366),
@@ -403,11 +404,9 @@ class _SignUpPageState extends State<SignUpPage> {
       if(user != null){
 
         DocumentReference documentReference = collRef.doc(user.uid);
-
-
         documentReference.set({
           'Username': _usernameController.text,
-          'Age': _ageController.value,
+          'Age':   _ageController.text,//_ageController.value,
 
         });
         // Navigator.pushNamed(context, "/HomePage");
@@ -432,7 +431,7 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }else{
         Fluttertoast.showToast(
-            msg: "Could not create Account",
+            msg: "Ops! Could not create Account 1",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 3,
@@ -445,7 +444,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } catch (e) {
       print(e);
       Fluttertoast.showToast(
-          msg: "Could not create Account",
+          msg: "Ops! Could not create Account",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 3,

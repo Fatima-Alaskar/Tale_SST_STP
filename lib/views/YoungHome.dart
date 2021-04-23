@@ -12,6 +12,7 @@ import '../Global.dart';
 import '../models/Story.dart';
 import 'StoryDetails.dart';
 import '../models/UserStory.dart';
+import 'SearchYoung.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -82,9 +83,24 @@ class _HomePageState extends State<HomePage> {
                                 errorBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none,
                                 labelText: 'Search',
-                                prefixIcon: Icon(Icons.search),
+                                prefixIcon: IconButton(
+                                  alignment: Alignment.center,
+                                  icon: Icon(
+                                    Icons.search,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => SearchYoung()),
+                                    );
+                                  },
+                                ),
+
+                                //Icon(Icons.search), TODO: instead of Icon button.
                                 suffix: Container(
                                   height: 30,
+
+
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0),
                                     child: RaisedButton(child: Text("Search"),onPressed: (){
