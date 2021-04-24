@@ -1,11 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
-// import '../../../tale_teller_/lib/Global.dart';
 // import 'package:flutter/scheduler.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import '../../../tale_teller_/lib/views/ProfilePage.dart';
-// import '../../../tale_teller_/lib/views/YoungHome.dart';
 //
 //
 // class Favorite extends StatefulWidget {
@@ -57,7 +54,7 @@
 //           children: <Widget>[
 //             Center(child: Text("Favorite Stories")),
 //
-//             Expanded(child: ListView.builder(
+//         ListView()
 //                 itemCount: _favorites.length,
 //                 itemBuilder: _, index){
 //
@@ -72,78 +69,78 @@
 //       ),);
 //
 //       }
-
-
-      //TODO: reconfigure bottom navigation bar again!
-
-  //
-  //           bottomNavigationBar: BottomNavigationBar(
-  //           backgroundColor: Color(0xFF0DB4EA),
-  //           onTap: (int tabIndex) {
-  //             selectTap(tabIndex);
-  //           },
-  //           currentIndex: _bottomNavigationBar,
-  //           type: BottomNavigationBarType.fixed,
-  //           items: [
-  //             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.userAlt),
-  //                 title: Text("Profile")),
-  //             BottomNavigationBarItem(
-  //                 icon: Icon(Icons.home), title: Text("Home")),
-  //             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.signOutAlt),
-  //                 title: Text("Logout")),
-  //           ]),
-  //   );
-  // }
-
-//
-//   selectTap(int tabIndex) {
-//     tabindex = tabIndex;
-//     setState(() {
-//       _bottomNavigationBar = tabIndex;
 //
 //
-//       switch (tabIndex) {
-//         case 0 :
-//           getBodyToProfilePage();
-//           break;
-//         case 1:
-//           getBodyToHomePage();
-//           break;
-//         case 2:
-//           getBodyToLogout();
-//           break;
-//       }
-//     });
-//   }
+//       //TODO: reconfigure bottom navigation bar again!
 //
-//   getBodyToProfilePage() {
-//     setState(() {
-//       onTap: () {
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => ProfilePage()),
-//         );
-//   };);}}
+//   //
+//   //           bottomNavigationBar: BottomNavigationBar(
+//   //           backgroundColor: Color(0xFF0DB4EA),
+//   //           onTap: (int tabIndex) {
+//   //             selectTap(tabIndex);
+//   //           },
+//   //           currentIndex: _bottomNavigationBar,
+//   //           type: BottomNavigationBarType.fixed,
+//   //           items: [
+//   //             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.userAlt),
+//   //                 title: Text("Profile")),
+//   //             BottomNavigationBarItem(
+//   //                 icon: Icon(Icons.home), title: Text("Home")),
+//   //             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.signOutAlt),
+//   //                 title: Text("Logout")),
+//   //           ]),
+//   //   );
+//   // }
 //
-//   getBodyToHomePage() {
-//     setState(() {
-//       onTap: () {
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => HomePage()),
-//         );
-//       };}}
-//
-//   getBodyToLogout() {
-//     Global.auth.signOut();
-//
-//     SchedulerBinding.instance.addPostFrameCallback((_) {
-//       Navigator.of(context).pushNamedAndRemoveUntil(
-//           '/LoginPage', (Route<dynamic> route) => false);
-//     });
-//   }
-//
-//
-//
-// }
-//
+// //
+// //   selectTap(int tabIndex) {
+// //     tabindex = tabIndex;
+// //     setState(() {
+// //       _bottomNavigationBar = tabIndex;
+// //
+// //
+// //       switch (tabIndex) {
+// //         case 0 :
+// //           getBodyToProfilePage();
+// //           break;
+// //         case 1:
+// //           getBodyToHomePage();
+// //           break;
+// //         case 2:
+// //           getBodyToLogout();
+// //           break;
+// //       }
+// //     });
+// //   }
+// //
+// //   getBodyToProfilePage() {
+// //     setState(() {
+// //       onTap: () {
+// //         Navigator.push(
+// //           context,
+// //           MaterialPageRoute(builder: (context) => ProfilePage()),
+// //         );
+// //   };);}}
+// //
+// //   getBodyToHomePage() {
+// //     setState(() {
+// //       onTap: () {
+// //         Navigator.push(
+// //           context,
+// //           MaterialPageRoute(builder: (context) => HomePage()),
+// //         );
+// //       };}}
+// //
+// //   getBodyToLogout() {
+// //     Global.auth.signOut();
+// //
+// //     SchedulerBinding.instance.addPostFrameCallback((_) {
+// //       Navigator.of(context).pushNamedAndRemoveUntil(
+// //           '/LoginPage', (Route<dynamic> route) => false);
+// //     });
+// //   }
+// //
+// //
+// //
+// // }
+// //

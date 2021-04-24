@@ -130,6 +130,7 @@ class _PreShoolerState extends State<PreShooler> {
 
                                     ),
                                         onTap: () {
+                                          print(snapshots.data[index].toString());
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
