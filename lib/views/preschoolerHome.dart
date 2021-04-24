@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/gestures.dart';
@@ -71,7 +70,7 @@ class _PreShoolerState extends State<PreShooler> {
                   child: Column(
                     children: [
 
-                      StreamBuilder(
+                      StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance.collection('Story')
                           .snapshots(),
                       builder: (context, snapshots) {
@@ -82,6 +81,7 @@ class _PreShoolerState extends State<PreShooler> {
                             ConnectionState.waiting) {
                           return Text("");
                         }
+
                         return Container(
                           child: GridView.builder(
                               gridDelegate:
@@ -91,7 +91,7 @@ class _PreShoolerState extends State<PreShooler> {
                               itemCount: snapshots.data.docs.length,
                               //snapshots.data.documents.length,
                               itemBuilder: (context, index) {
-                                //DocumentSnapshot documentSnapshot=snapshots.data;
+                                DocumentSnapshot documentSnapshot=snapshots.data.docs[index];
                                 return Container(
                                   child: Dismissible(
 
@@ -130,11 +130,12 @@ class _PreShoolerState extends State<PreShooler> {
 
                                     ),
                                         onTap: () {
-                                          print(snapshots.data[index].toString());
+                                          print(documentSnapshot.reference.id.toString()
+                                          + "++++++++++++++++++++++++++++++");
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) => ViewStory(snapshots.data[index].toString())),
+                                                builder: (context) => ViewStory(documentSnapshot.reference.id.toString())),
                                           );
                                         },                                      ),
                                   //   child: Card(

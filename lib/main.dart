@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tale_teller/views/ViewStory.dart';
 import 'package:tale_teller/views/preschoolerHome.dart';
 import 'views/NewStory.dart';
 import 'views/LoginPage.dart';
@@ -9,6 +10,8 @@ import 'views/YoungHome.dart';
 import 'views/ProfilePage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'views/Home.dart';
+import 'views/Favorite.dart';
+import 'views/Results.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
         '/SignUpPage': (BuildContext context) => SignUpPage(),
         '/PreShooler': (BuildContext context) => PreShooler(),
         '/Home': (BuildContext context) => Home(),
+        '/Favorite': (BuildContext context) => Favorite(),
+        '/Results': (BuildContext context) => Results(),
+
+
 
 
         // '/ContactUsPage': (BuildContext context) => ContactUsPage(),
@@ -103,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         //here we can change
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/SignUpPage', (Route<dynamic> route) => false);
+                         '/PreShooler', (Route<dynamic> route) => false);
                       });
                     }
                     ),

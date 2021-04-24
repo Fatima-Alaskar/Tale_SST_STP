@@ -49,8 +49,8 @@ class _SearchPageState extends State<SearchPage> {
               : ListView.builder(
              itemCount: snapshot.data.docs.length,
              itemBuilder: (context, index) {
-              DocumentSnapshot data = snapshot.data.docs[index];
-              return Card(
+               DocumentSnapshot documentSnapshot=snapshot.data.docs[index];
+               return Card(
               elevation: 4,
               margin: EdgeInsets.all(8),
               shape: RoundedRectangleBorder(
@@ -76,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
               Navigator.push(
               context,
               MaterialPageRoute(
-              builder: (context) => ViewStory(snapshot.data.docs[index].toString())),
+              builder: (context) => ViewStory(documentSnapshot.reference.id.toString())),
               );
               },
               ),
@@ -88,8 +88,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-}
-
+}//TODO: msg if  no result story
 //
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
