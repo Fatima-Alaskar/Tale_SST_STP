@@ -39,8 +39,6 @@ class _HomeState extends State<Home> {
                   fit: BoxFit.cover
               )
           ),
-
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -71,7 +69,6 @@ class _HomeState extends State<Home> {
                                   highlightColor:Color(0xFFF50057),
                                   icon: Icon(Icons.addchart_rounded,
                                   color: Colors.white),),),
-
                         ],
                       )))),
               Expanded(
@@ -86,7 +83,6 @@ class _HomeState extends State<Home> {
                   child: Image(image: AssetImage("assets/images/ypung.png")),
 
                 ),),
-
               Expanded(
                 flex: 10,
                 child: FlatButton(
@@ -108,8 +104,6 @@ class _HomeState extends State<Home> {
     FirebaseFirestore.instance.collection('Userinfo').doc(user.uid).get().then((value) {
       setState(() {
         age=double.parse(value.data()["Age"]);
-
-
       });
     });
     if (age >5.9) {
@@ -117,6 +111,4 @@ class _HomeState extends State<Home> {
     }
     else return false;
   }
-
-
 }
