@@ -3,6 +3,7 @@ import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 //import 'package:audioplayers/audioplayers.dart';
 //import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class ViewStory extends StatefulWidget {
@@ -23,19 +24,25 @@ class _ViewStoryState extends State<ViewStory> {
 
   bool _isLoading = true;
   PDFDocument document;
+String PDF;
+String audio;
+
 
   @override
   void initState() {
-    super.initState();
-    loadDocument();
-  }
+  super.initState();
+  loadDocument(); }
 
   loadDocument() async {
-    document = await PDFDocument.fromAsset('assets/sample.pdf');
+    FirebaseFirestore.instance.collection('Story').doc(id).get().then((value) {
+      setState(() {
+        PDF=value.data()["Story"];
+        audio=value.data()["Audio"];});
+    });
 
+    document = await PDFDocument.fromURL(PDF);
     setState(() => _isLoading = false);
   }
-
 
 
 
@@ -44,6 +51,15 @@ class _ViewStoryState extends State<ViewStory> {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+        icon: Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+        title: Text("View Story"),
+        centerTitle: true,
+      ),
+
         body: Container(
           height: screenHeight,
           width: screenWidth,
@@ -53,9 +69,62 @@ class _ViewStoryState extends State<ViewStory> {
                   fit: BoxFit.cover
               )
           ),
-        ),
-      
-    );
+            child: Column(
+                children: [
+                  Container(
+                    child: _isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : PDFViewer(
+                      document: document,
+                      zoomSteps: 1,
+                      //uncomment below line to preload all pages
+                       lazyLoad: false,
+                      // uncomment below line to scroll vertically
+                      // scrollDirection: Axis.vertical,
 
+                      //uncomment below code to replace bottom navigation with your own
+                       navigationBuilder:
+                      (context, page, totalPages, jumpToPage, animateToPage) {
+                    return ButtonBar(
+                      alignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.first_page),
+                          onPressed: () {
+                            jumpToPage(page: 0);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_back),
+                          onPressed: () {
+                            animateToPage(page: page - 2);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_forward),
+                          onPressed: () {
+                            animateToPage(page: page);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.last_page),
+                          onPressed: () {
+                            jumpToPage(page: totalPages - 1);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                    ),
+
+                  ),
+                  Container(
+
+                  ),
+
+
+    ],),
+                    ),
+              ); //}
   }
 }
