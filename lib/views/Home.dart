@@ -66,7 +66,9 @@ class _HomeState extends State<Home> {
         ),
         ),
 
-        SizedBox(),
+        SizedBox(
+          height: 2,
+        ),
 
          Column(
           crossAxisAlignment: CrossAxisAlignment.center,

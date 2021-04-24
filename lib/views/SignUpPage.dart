@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 
 import '../Global.dart';
+import 'NavigationBar.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -426,8 +427,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
         SchedulerBinding.instance.addPostFrameCallback((_) {
 
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              '/Home', (Route<dynamic> route) => false);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  NavigationBar(),
+            ),
+                (route) => false,
+          );
         });
       }else{
         Fluttertoast.showToast(

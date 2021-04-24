@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+//import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 //import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 
 
 class ViewStory extends StatefulWidget {
@@ -32,6 +33,7 @@ class _ViewStoryState extends State<ViewStory> {
               )
           ),
         ),
+      
     );
 
   }

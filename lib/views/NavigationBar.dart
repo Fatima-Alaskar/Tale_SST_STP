@@ -14,7 +14,7 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  int _currentIndex = 2;
+  int _currentIndex = 1;
   final List<Widget> _children = [
     ProfilePage(),
     HomePage(),

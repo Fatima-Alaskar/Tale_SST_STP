@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tale_teller/views/preschoolerHome.dart';
 import 'views/NewStory.dart';
 import 'views/LoginPage.dart';
 import 'views/SignUpPage.dart';
 import 'views/YoungHome.dart';
 import 'views/ProfilePage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'views/Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,6 +29,10 @@ class MyApp extends StatelessWidget {
         // '/AppMenuPage': (BuildContext context) => AppMenuPage(),
         '/LoginPage': (BuildContext context) => LoginPage(),
         '/SignUpPage': (BuildContext context) => SignUpPage(),
+        '/PreShooler': (BuildContext context) => PreShooler(),
+        '/Home': (BuildContext context) => Home(),
+
+
         // '/ContactUsPage': (BuildContext context) => ContactUsPage(),
         // '/PrivacyPolicyPage': (BuildContext context) => PrivacyPolicyPage(),
       },

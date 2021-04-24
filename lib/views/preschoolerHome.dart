@@ -15,12 +15,12 @@ import 'ViewStory.dart';
 import 'StoryInside.dart';
 import 'SearchStory.dart';
 
-class Storys extends StatefulWidget {
+class PreShooler extends StatefulWidget {
   @override
-  _StorysState createState() => _StorysState();
+  _PreShoolerState createState() => _PreShoolerState();
 }
 
-class _StorysState extends State<Storys> {
+class _PreShoolerState extends State<PreShooler> {
 
   double screenHeight;
   double screenWidth;
@@ -40,95 +40,140 @@ class _StorysState extends State<Storys> {
               .width;
 
           return Scaffold(
-              body: Container(
-                height: screenHeight,
-                width: screenWidth,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/home-bg.png"),
-                        fit: BoxFit.cover
-                    )
+              resizeToAvoidBottomInset: false,
+            appBar: AppBar(
+              title: Center(child: Text('Preschooler Library')),
+              actions: <Widget>[
+              IconButton(
+              alignment: Alignment.center,
+              icon: Icon(
+                Icons.search,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchPage()),
+                );
+              },
+            ),],),
+              body: SingleChildScrollView(
+                child: Container(
+                  height: screenHeight,
+                  width: screenWidth,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/home-bg.png"),
+                          fit: BoxFit.cover
+                      )
+
+                  ),
+
+                  child: Column(
+                    children: [
+
+                      StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection('Story')
+                          .snapshots(),
+                      builder: (context, snapshots) {
+                        if (snapshots.hasError) {
+                          return Text('Something went wrong');
+                        }
+                        if (snapshots.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text("");
+                        }
+                        return Container(
+                          child: GridView.builder(
+                              gridDelegate:
+                              new SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                              shrinkWrap: true,
+                              itemCount: snapshots.data.docs.length,
+                              //snapshots.data.documents.length,
+                              itemBuilder: (context, index) {
+                                //DocumentSnapshot documentSnapshot=snapshots.data;
+                                return Container(
+                                  child: Dismissible(
+
+                                    onDismissed: (direction) {
+                                      AbsorbPointer(absorbing: false);
+                                    },
+                                    key: Key(index.toString()),
+
+                                    child: Container(
+                                      child: InkWell(
+                                        child: Card(
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              AspectRatio(
+                                                aspectRatio: 18.0 / 11.0,
+                                                child: Image.network(
+
+                                                          snapshots.data.docs[index]["img"],
+                                                        ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(snapshots.data.docs[index]["Title"],),
+                                                    SizedBox(height: 8.0),
+
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                    ),
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => ViewStory(snapshots.data[index].toString())),
+                                          );
+                                        },                                      ),
+                                  //   child: Card(
+                                  //     elevation: 4,
+                                  //     margin: EdgeInsets.all(8),
+                                  //     shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.circular(8)),
+                                  //
+                                  //
+                                  //     child: ListTile(
+                                  //       title: Text(
+                                  //         snapshots.data.docs[index]["Title"],
+                                  //
+                                  //       ),
+                                  //       /*trailing: IconButton(
+                                  //   icon: Icon(Icons.delete),
+                                  //   onPressed: () {
+                                  //     setState(() {
+                                  //       shoppingList.removeAt(index);
+                                  //       updateList();
+                                  //     });
+                                  //   },
+                                  // ),*/
+                                  //       leading: Image.network(
+                                  //
+                                  //         snapshots.data.docs[index]["img"],
+                                  //       ),
+
+                                  //     ),
+                                  //   ),
+                                  ),
+                                ),);
+                              }),
+                        ); //}
+                        //return Text("add something");
+                      }),
+                    ],
+                  ),
 
                 ),
-
-                child: Column(
-                  children: [
-                    IconButton(
-                      alignment: Alignment.center,
-                      icon: Icon(
-                        Icons.search,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchPage()),
-                        );
-                      },
-                    ),
-                    StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection('Story')
-                        .snapshots(),
-                    builder: (context, snapshots) {
-                      if (snapshots.hasError) {
-                        return Text('Something went wrong');
-                      }
-                      if (snapshots.connectionState ==
-                          ConnectionState.waiting) {
-                        return Text("");
-                      }
-                      return GridView.builder(
-                          gridDelegate:
-                          new SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
-                          shrinkWrap: true,
-                          itemCount: snapshots.data.docs.length,
-                          //snapshots.data.documents.length,
-                          itemBuilder: (context, index) {
-                            //DocumentSnapshot documentSnapshot=snapshots.data;
-                            return Dismissible(
-
-                              onDismissed: (direction) {
-                                AbsorbPointer(absorbing: false);
-                              },
-                              key: Key(index.toString()),
-                              child: Card(
-                                elevation: 4,
-                                margin: EdgeInsets.all(8),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: ListTile(
-                                  title: Text(
-                                    snapshots.data[index]["Title"], // maybe wrong
-                                    textAlign: TextAlign.right,
-                                  ),
-                                  /*trailing: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () {
-                                setState(() {
-                                  shoppingList.removeAt(index);
-                                  updateList();
-                                });
-                              },
-                            ),*/
-                                  trailing: Image.network(
-                                    snapshots.data[index]["img"],
-                                  ),
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ViewStory(snapshots.data[index].toString())),
-                                    );
-                                  },
-                                ),
-                              ),
-                            );
-                          }); //}
-                      //return Text("add something");
-                    }),
-                  ],
-                ),
-
               )
           );
         }

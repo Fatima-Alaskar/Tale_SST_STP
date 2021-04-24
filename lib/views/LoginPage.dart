@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../Global.dart';
+import 'NavigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -416,8 +417,14 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: 16.0
             );
 
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                '/Home', (Route<dynamic> route) => false);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    NavigationBar(),
+              ),
+                  (route) => false,
+            );
           });
         // }else{
         //   Fluttertoast.showToast(

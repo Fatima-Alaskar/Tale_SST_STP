@@ -28,6 +28,8 @@ class _SearchPageState extends State<SearchPage> {
             onSubmitted: (val) {
               setState(() {
                 title = val;
+                print (val);
+
               });
             },
           ),
@@ -37,7 +39,7 @@ class _SearchPageState extends State<SearchPage> {
         stream: (title != "" && title != null)
             ? FirebaseFirestore.instance
             .collection('Story')
-            .where("searchKeywords", arrayContains: title)
+            .where( "Title",isEqualTo: title)
             .snapshots()
             : FirebaseFirestore.instance.collection("Story").snapshots(),
         builder: (context, snapshot) {
