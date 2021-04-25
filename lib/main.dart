@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tale_teller/views/ViewStory.dart';
@@ -15,6 +16,7 @@ import 'views/Results.dart';
 
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -22,7 +24,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      return Container(
+        color: Colors.white,
+      );
+    };
 
     return MaterialApp(
       routes: <String, WidgetBuilder>{

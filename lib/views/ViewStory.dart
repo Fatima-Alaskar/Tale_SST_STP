@@ -31,10 +31,11 @@ class _ViewStoryState extends State<ViewStory> {
 
   String PDF;
   String audio;
-
+  int count;
+  int word;
   bool seekDone;
   bool player=false;
-
+  User user;
   // AudioCache audioCache = AudioCache();
   // AudioPlayer advancedPlayer = AudioPlayer();
 
@@ -56,16 +57,28 @@ class _ViewStoryState extends State<ViewStory> {
      setState(() {
         PDF=value.data()["Story"];
         audio=value.data()["Audio"];
-
+        word=int.parse(value.data()["NumberOfWords"]);
       });
     });
    document = await PDFDocument.fromURL(
        PDF);
-
     setState(() => _isLoading = false);
+   calScore();
   }
 
-
+calScore() async{
+    print(word.toString()+"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
+  user = await _auth.currentUser;
+  await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid.toString()).get().then((value){
+    setState(() {
+      count=int.parse(value.data()['Score'].toString());
+    });
+  });
+    print(count.toString()+"ccccccccccccccccccccccccccccccccccccccc");
+    // String w = word+count;
+  await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid).update({'Score': word+count,
+  });
+}
 
   @override
   Widget build(BuildContext context) {

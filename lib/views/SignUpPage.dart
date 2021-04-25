@@ -418,9 +418,12 @@ class _SignUpPageState extends State<SignUpPage> {
         await user.reload();
         DocumentReference documentReference = collRef.doc(user.uid);
         documentReference.set({
-          'Username': _usernameController.text,
+         'Username': _usernameController.text,
           'Age':   _ageController.text,//_ageController.value,
 
+        });
+        FirebaseFirestore.instance.collection('listeningScore').doc(user.uid.toString()).set({
+          'Score':0,
         });
 
         // Navigator.pushNamed(context, "/HomePage");
