@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tale_teller/views/Home.dart';
+import 'package:tale_teller/views/NavBar.dart';
 import 'package:tale_teller/views/editProfile.dart';
 
 
@@ -46,7 +48,12 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.arrow_back_rounded),
+              icon: Icon(Icons.arrow_back_rounded),
+              onPressed: ()  {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NavBar()),
+                );}
           ),
           IconButton(
               icon: Icon(Icons.edit),

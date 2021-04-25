@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+final firestoreInstance = FirebaseFirestore.instance;
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
 
 class Favorite extends StatefulWidget {
   @override
