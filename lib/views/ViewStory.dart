@@ -117,48 +117,43 @@ class _ViewStoryState extends State<ViewStory> {
                          //lazyLoad: false,
                         // uncomment below line to scroll vertically
                         // scrollDirection: Axis.vertical,
-
                         //uncomment below code to replace bottom navigation with your own
-                    //      navigationBuilder:
-                    //     (context, page, totalPages, jumpToPage, animateToPage) {
-                    //   return ButtonBar(
-                    //     alignment: MainAxisAlignment.spaceEvenly,
-                    //     children: <Widget>[
-                    //       IconButton(
-                    //         icon: Icon(Icons.first_page),
-                    //         onPressed: () {
-                    //           jumpToPage(page: 0);
-                    //         },
-                    //       ),
-                    //       IconButton(
-                    //         icon: Icon(Icons.arrow_back),
-                    //         onPressed: () {
-                    //           animateToPage(page: page - 2);
-                    //         },
-                    //       ),
-                    //       IconButton(
-                    //         icon: Icon(Icons.arrow_forward),
-                    //         onPressed: () {
-                    //           animateToPage(page: page);
-                    //         },
-                    //       ),
-                    //       IconButton(
-                    //         icon: Icon(Icons.last_page),
-                    //         onPressed: () {
-                    //           jumpToPage(page: totalPages - 1);
-                    //         },
-                    //       ),
-                    //     ],
-                    //   );
-                    // },
+                         navigationBuilder:
+                        (context, page, totalPages, jumpToPage, animateToPage) {
+                      return ButtonBar(
+                        alignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.first_page),
+                            onPressed: () {
+                              jumpToPage(page: 0);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.arrow_back),
+                            onPressed: () {
+                              animateToPage(page: page - 2);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.arrow_forward),
+                            onPressed: () {
+                              animateToPage(page: page);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.last_page),
+                            onPressed: () {
+                              jumpToPage(page: totalPages - 1);
+                            },
+                          ),
+                        ],
+                      );
+                    },
                       ),
 
                     ),
-                    Container(
-
-
-
-                    ),
+                    Container(),
 
 
     ],),

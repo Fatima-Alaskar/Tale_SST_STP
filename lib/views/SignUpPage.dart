@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-
 import '../Global.dart';
 import 'NavigationBar.dart';
 
@@ -431,7 +429,7 @@ class _SignUpPageState extends State<SignUpPage> {
             context,
             MaterialPageRoute(
               builder: (BuildContext context) =>
-                  NavigationBar(),
+                  NavBar(),
             ),
                 (route) => false,
           );

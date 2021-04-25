@@ -421,7 +421,7 @@ class _LoginPageState extends State<LoginPage> {
               context,
               MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    NavigationBar(),
+                    NavBar(),
               ),
                   (route) => false,
             );
