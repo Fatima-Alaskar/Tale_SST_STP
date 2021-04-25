@@ -15,24 +15,24 @@ class _ResultsState extends State<Results> {
   double Lscore;
   double Rscore;
 
-  void initState() {
-    super.initState();
-    initUser();
-  }
-  initUser() async {
-    user = await _auth.currentUser;
-    FirebaseFirestore.instance.collection("listeningScore").doc(user.uid).get().then((value){
-      FirebaseFirestore.instance.collection("ReadingScore").doc(user.uid).get().then((value){
-        setState(() {
-        Lscore = value.data["listeningScore"].toDouble();
-      },
-
-      setState(() {
-          Rscore= value.data["ReadScore"].toDouble();
-        });
-      }
-    });
-  }
+  // void initState() {
+  //   super.initState();
+  //   initUser();
+  // }
+  // initUser() async {
+  //   user = await _auth.currentUser;
+  //   FirebaseFirestore.instance.collection("listeningScore").doc(user.uid).get().then((value){
+  //     FirebaseFirestore.instance.collection("ReadingScore").doc(user.uid).get().then((value){
+  //       setState(() {
+  //       Lscore = value.data["listeningScore"].toDouble();
+  //     },
+  //
+  //     setState(() {
+  //         Rscore= value.data["ReadScore"].toDouble();
+  //       });
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

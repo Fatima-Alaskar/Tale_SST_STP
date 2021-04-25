@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'Favorite.dart';
+import 'package:tale_teller/views/LoginPage.dart';
+import 'preschoolerHome.dart';
+import '../Global.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -25,6 +27,8 @@ class _HomeState extends State<Home> {
     user = await _auth.currentUser;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -35,10 +39,12 @@ class _HomeState extends State<Home> {
           width: screenWidth,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Home-bg.png"),
+                  image: AssetImage("assets/images/Home.png"),
                   fit: BoxFit.cover
               )
           ),
+
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -53,30 +59,41 @@ class _HomeState extends State<Home> {
                         children:  <Widget> [
                           Expanded(
                             child: IconButton(
-                                onPressed: (){
-                                  Navigator.pushNamed(context, '/Favorite');
-                                },
-                                color: Color(0xFF72A6C3),
-                                highlightColor:Color(0xFFF50057),
-                                icon: Icon( Icons.favorite,
-                                    color: Colors.white),),),
-                          Expanded(
-                              child: IconButton(
-                                  onPressed: (){
-                                    Navigator.pushNamed(context, '/Results');
-                                  },
-                                  color: Color(0xFF72A6C3),
-                                  highlightColor:Color(0xFFF50057),
-                                  icon: Icon(Icons.addchart_rounded,
+                              onPressed: (){
+                                Navigator.pushNamed(context, '/Favorite');
+                              },
+                              color: Color(0xFF72A6C3),
+                              highlightColor:Color(0xFFF50057),
+                              icon: Icon( Icons.favorite,
                                   color: Colors.white),),),
+                          Expanded(
+                            child: IconButton(
+                              onPressed: () {
+                                Global.auth.signOut();
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => LoginPage(),
+                                  ),
+                                      (route) => false,
+                                );
+                              },
+                              color: Color(0xFF72A6C3),
+                              highlightColor:Color(0xFFF50057),
+                              icon: Icon(Icons.logout,
+                                  color: Colors.white),),),
+
                         ],
                       )))),
+
               Expanded(
-                flex: 10,
                 child: FlatButton(
                   onPressed: (){
+
                     if (ValidAge()){
-                      Navigator.pushNamed(context, '/YoungHome'); }
+                      Navigator.pushNamed(context, '/YoungHome');
+
+                    }
                     else {
                       AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}
                   },
@@ -84,18 +101,25 @@ class _HomeState extends State<Home> {
 
                 ),),
               Expanded(
-                flex: 10,
                 child: FlatButton(
                   onPressed: (){
-                    Navigator.pushNamed(context, '/preschoolerHome');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PreShooler()),
+                    );
+
+
                   },
                   child: Image(image: AssetImage("assets/images/pre.png")),
                 ),
               ),
             ],
+
           ),
         )
     );
+
+
   }
 
 
@@ -104,6 +128,8 @@ class _HomeState extends State<Home> {
     FirebaseFirestore.instance.collection('Userinfo').doc(user.uid).get().then((value) {
       setState(() {
         age=double.parse(value.data()["Age"]);
+
+
       });
     });
     if (age >5.9) {
@@ -111,4 +137,6 @@ class _HomeState extends State<Home> {
     }
     else return false;
   }
+
+
 }

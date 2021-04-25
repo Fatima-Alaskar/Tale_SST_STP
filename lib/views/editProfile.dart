@@ -70,10 +70,12 @@ class _editProfileState extends State<editProfile> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Sign up",style: TextStyle(fontSize: 28, color: Colors.white),)
+                                Text("Edit Profile",style: TextStyle(fontSize: 28, color: Colors.white),)
                               ],
                             ),
+
                             SizedBox(height: 20,),
+
                             Container(
                               // color: Colors.white,
                               decoration: BoxDecoration(
@@ -86,6 +88,7 @@ class _editProfileState extends State<editProfile> {
                                   validator: (String value) {
                                     if (value.isEmpty) return 'Please enter some text';
                                     return null;
+
                                   },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
@@ -100,12 +103,14 @@ class _editProfileState extends State<editProfile> {
                                     // labelStyle: TextStyle(
                                     //     color: Colors.white),
                                   ),
+
                                   // style: TextStyle(
                                   //     color: Colors.white, decorationColor: Colors.white),
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
                             ),
+
                             SizedBox(height: 20,),
                             // TextFormField(
                             //   controller: _emailController,

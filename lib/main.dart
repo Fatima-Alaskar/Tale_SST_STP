@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         //here we can change
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                         '/PreShooler', (Route<dynamic> route) => false);
+                         '/SignUpPage', (Route<dynamic> route) => false);
                       });
                     }
                     ),

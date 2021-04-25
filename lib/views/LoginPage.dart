@@ -4,9 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tale_teller/views/YoungHome.dart';
 
 import '../Global.dart';
+import 'Home.dart';
 import 'NavBar.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,361 +33,363 @@ class _LoginPageState extends State<LoginPage> {
     screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
-        height: screenHeight,
-        width: screenWidth,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/login-bg.png"),
-                fit: BoxFit.cover
-            )
-        ),
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                SizedBox(height: 50,),
-                Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Log in",style: TextStyle(fontSize: 28, color: Colors.white),)
-                            ],
-                          ),
-                          SizedBox(height: 20,),
-                          Container(
-                            // color: Colors.white,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),color: Colors.white
+      body: SingleChildScrollView(
+        child: Container(
+          height: screenHeight,
+          width: screenWidth,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/login-bg.png"),
+                  fit: BoxFit.cover
+              )
+          ),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: 50,),
+                  Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Log in",style: TextStyle(fontSize: 28, color: Colors.white),)
+                              ],
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: TextFormField(
-                                controller: _usernameController,
-                                validator: (String value) {
-                                  if (value.isEmpty) return 'Please enter some text';
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  // enabledBorder: UnderlineInputBorder(
-                                  //   borderSide: BorderSide(color: Colors.white),
-                                  // ),
-                                  labelText: 'Username',
-                                  // labelStyle: TextStyle(
-                                  //     color: Colors.white),
+                            SizedBox(height: 20,),
+                            Container(
+                              // color: Colors.white,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),color: Colors.white
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: TextFormField(
+                                  controller: _usernameController,
+                                  validator: (String value) {
+                                    if (value.isEmpty) return 'Please enter some text';
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    // enabledBorder: UnderlineInputBorder(
+                                    //   borderSide: BorderSide(color: Colors.white),
+                                    // ),
+                                    labelText: 'Username',
+                                    // labelStyle: TextStyle(
+                                    //     color: Colors.white),
+                                  ),
+                                  // style: TextStyle(
+                                  //     color: Colors.white, decorationColor: Colors.white),
+                                  cursorColor: Color(0xFF556036),
                                 ),
-                                // style: TextStyle(
-                                //     color: Colors.white, decorationColor: Colors.white),
-                                cursorColor: Color(0xFF556036),
                               ),
                             ),
-                          ),
-                          SizedBox(height: 20,),
-                          // TextFormField(
-                          //   controller: _emailController,
-                          //   validator: (String value) {
-                          //     if (value.isEmpty) return 'Please enter some text';
-                          //     if (!value.contains('@')) return 'Please use University Email';
-                          //     return null;
-                          //   },
-                          //   decoration: InputDecoration(
-                          //     // enabledBorder: UnderlineInputBorder(
-                          //     //   // borderSide: BorderSide(color: Colors.white),
-                          //     // ),
-                          //     labelText: 'University Email',
-                          //     // labelStyle: TextStyle(
-                          //     //     color: Colors.white),
-                          //   ),
-                          //   // style: TextStyle(
-                          //   //     color: Colors.white, decorationColor: Colors.white),
-                          //   cursorColor: Color(0xFF556036),
-                          // ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),color: Colors.white
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: TextFormField(
-                                controller: _passwordController,
-                                obscureText: true,
-                                validator: (String value) {
-                                  if (value.isEmpty) return 'Please enter some text';
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  labelText: 'Password',
-                                  // labelStyle: TextStyle(color: Colors.white),
-                                  // enabledBorder: UnderlineInputBorder(
-                                  //   borderSide: BorderSide(color: Colors.white),
-                                  // ),
-                                  // focusedBorder: UnderlineInputBorder(
-                                  //   borderSide: BorderSide(color:  Colors.white),
-                                  // ),
-                                  // border: UnderlineInputBorder(
-                                  //   borderSide: BorderSide(color:  Colors.white),
-                                  // ),
+                            SizedBox(height: 20,),
+                            // TextFormField(
+                            //   controller: _emailController,
+                            //   validator: (String value) {
+                            //     if (value.isEmpty) return 'Please enter some text';
+                            //     if (!value.contains('@')) return 'Please use University Email';
+                            //     return null;
+                            //   },
+                            //   decoration: InputDecoration(
+                            //     // enabledBorder: UnderlineInputBorder(
+                            //     //   // borderSide: BorderSide(color: Colors.white),
+                            //     // ),
+                            //     labelText: 'University Email',
+                            //     // labelStyle: TextStyle(
+                            //     //     color: Colors.white),
+                            //   ),
+                            //   // style: TextStyle(
+                            //   //     color: Colors.white, decorationColor: Colors.white),
+                            //   cursorColor: Color(0xFF556036),
+                            // ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),color: Colors.white
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: TextFormField(
+                                  controller: _passwordController,
+                                  obscureText: true,
+                                  validator: (String value) {
+                                    if (value.isEmpty) return 'Please enter some text';
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    disabledBorder: InputBorder.none,
+                                    labelText: 'Password',
+                                    // labelStyle: TextStyle(color: Colors.white),
+                                    // enabledBorder: UnderlineInputBorder(
+                                    //   borderSide: BorderSide(color: Colors.white),
+                                    // ),
+                                    // focusedBorder: UnderlineInputBorder(
+                                    //   borderSide: BorderSide(color:  Colors.white),
+                                    // ),
+                                    // border: UnderlineInputBorder(
+                                    //   borderSide: BorderSide(color:  Colors.white),
+                                    // ),
+                                  ),
+                                  // style: TextStyle(
+                                  //     color: Colors.white, decorationColor: Colors.white),
+                                  cursorColor: Color(0xFF556036),
                                 ),
-                                // style: TextStyle(
-                                //     color: Colors.white, decorationColor: Colors.white),
-                                cursorColor: Color(0xFF556036),
                               ),
                             ),
-                          ),
-                          // SizedBox(height: 20,),
-                          // Row(
-                          //   children: [
-                          //     Container(
-                          //       width: screenWidth / 3,
-                          //       decoration: BoxDecoration(
-                          //           borderRadius: BorderRadius.circular(5),color: Colors.white
-                          //       ),
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.only(left: 8),
-                          //         child: TextFormField(
-                          //           controller: _ageController,
-                          //           obscureText: true,
-                          //           validator: (String value) {
-                          //             if (value.isEmpty) return 'Please enter some text';
-                          //             return null;
-                          //           },
-                          //           decoration: InputDecoration(
-                          //             labelText: 'Age',
-                          //             // labelStyle: TextStyle(color: Colors.white),
-                          //             // enabledBorder: UnderlineInputBorder(
-                          //             //   borderSide: BorderSide(color: Colors.white),
-                          //             // ),
-                          //             // focusedBorder: UnderlineInputBorder(
-                          //             //   borderSide: BorderSide(color:  Colors.white),
-                          //             // ),
-                          //             // border: UnderlineInputBorder(
-                          //             //   borderSide: BorderSide(color:  Colors.white),
-                          //             // ),
-                          //           ),
-                          //           // style: TextStyle(
-                          //           //     color: Colors.white, decorationColor: Colors.white),
-                          //           cursorColor: Color(0xFF556036),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(width: 20,),
-                          //     Expanded(
-                          //       flex: 2,
-                          //       child: Container(
-                          //         width: screenWidth / 3,
-                          //         decoration: BoxDecoration(
-                          //             borderRadius: BorderRadius.circular(5),color: Colors.white
-                          //         ),
-                          //         child: Padding(
-                          //           padding: const EdgeInsets.only(left: 8),
-                          //           child: TextFormField(
-                          //             controller: _educationLevelController,
-                          //             obscureText: true,
-                          //             validator: (String value) {
-                          //               if (value.isEmpty) return 'Please enter some text';
-                          //               return null;
-                          //             },
-                          //             decoration: InputDecoration(
-                          //               labelText: 'Educational Level',
-                          //               // labelStyle: TextStyle(color: Colors.white),
-                          //               // enabledBorder: UnderlineInputBorder(
-                          //               //   borderSide: BorderSide(color: Colors.white),
-                          //               // ),
-                          //               // focusedBorder: UnderlineInputBorder(
-                          //               //   borderSide: BorderSide(color:  Colors.white),
-                          //               // ),
-                          //               // border: UnderlineInputBorder(
-                          //               //   borderSide: BorderSide(color:  Colors.white),
-                          //               // ),
-                          //             ),
-                          //             // style: TextStyle(
-                          //             //     color: Colors.white, decorationColor: Colors.white),
-                          //             cursorColor: Color(0xFF556036),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     Padding(
-                          //       padding: const EdgeInsets.only(
-                          //         top: 15,
-                          //       ),
-                          //       child: ButtonTheme(
-                          //         minWidth: MediaQuery.of(context).size.width / 2,
-                          //         child: RaisedButton(
-                          //             child: Text("Create Account", style: TextStyle(color: Colors.white),),
-                          //             color: Color(0xFF556036),
-                          //             shape: RoundedRectangleBorder(
-                          //                 borderRadius: BorderRadius.circular(50.0)),
-                          //             onPressed: () async {
-                          //
-                          //               if (_formKey.currentState.validate()) {
-                          //                 // await _signUpWithEmailAndPassword();
-                          //               }
-                          //               // Navigator.pushNamed(context, "/AppHome");
-                          //             }),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                          // SizedBox(height: 10),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     // Checkbox(
-                          //     //     value: _termsCheck,
-                          //     //     onChanged: (bool terms){
-                          //     //       setState(() {
-                          //     //         _termsCheck = terms;
-                          //     //       });
-                          //     //
-                          //     //     },
-                          //     //     ),
-                          //     RichText(
-                          //       text: TextSpan(children: [
-                          //         TextSpan(
-                          //             text: "Existing sdtudent? ",
-                          //             style: TextStyle(color: Colors.black)
-                          //         ),
-                          //         TextSpan(
-                          //           text: "Login",
-                          //           recognizer: new TapGestureRecognizer()..onTap = () => {
-                          //             Navigator.pushNamed(context, "/LoginPage"),
-                          //           },
-                          //           style: TextStyle(color: Color(0xFFa39360)),
-                          //         ),
-                          //       ]),
-                          //     ),
-                          //   ],
-                          // ),
-                          // SizedBox(height: 10,),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     // Checkbox(
-                          //     //     value: _termsCheck,
-                          //     //     onChanged: (bool terms){
-                          //     //       setState(() {
-                          //     //         _termsCheck = terms;
-                          //     //       });
-                          //     //
-                          //     //     },
-                          //     //     ),
-                          //     Expanded(
-                          //       child: RichText(
-                          //         maxLines: 4,
-                          //         softWrap: true,
-                          //         overflow: TextOverflow.ellipsis,
-                          //         text: TextSpan(children: [
-                          //           TextSpan(
-                          //               text: "By Continuing you agree to Majmaah University ",
-                          //               style: TextStyle(color: Colors.black)
-                          //           ),
-                          //           TextSpan(
-                          //             text: "Privacy Policy",
-                          //             recognizer: new TapGestureRecognizer()..onTap = () => {
-                          //               Navigator.pushNamed(context, "/PrivacyPolicyPage"),
-                          //             },
-                          //             style: TextStyle(color: Color(0xFFa39360)),
-                          //           ),
-                          //         ]),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                        ],
-                      )),
-                )
-              ],
-            ),
-            Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    width: screenWidth / 3 * 2,
-                    height: 50,
-                    child: RaisedButton(
-                        child: Text("Log in", style: TextStyle(color: Colors.white),),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0), ),
-                        color: Color(0xFF185366),
+                            // SizedBox(height: 20,),
+                            // Row(
+                            //   children: [
+                            //     Container(
+                            //       width: screenWidth / 3,
+                            //       decoration: BoxDecoration(
+                            //           borderRadius: BorderRadius.circular(5),color: Colors.white
+                            //       ),
+                            //       child: Padding(
+                            //         padding: const EdgeInsets.only(left: 8),
+                            //         child: TextFormField(
+                            //           controller: _ageController,
+                            //           obscureText: true,
+                            //           validator: (String value) {
+                            //             if (value.isEmpty) return 'Please enter some text';
+                            //             return null;
+                            //           },
+                            //           decoration: InputDecoration(
+                            //             labelText: 'Age',
+                            //             // labelStyle: TextStyle(color: Colors.white),
+                            //             // enabledBorder: UnderlineInputBorder(
+                            //             //   borderSide: BorderSide(color: Colors.white),
+                            //             // ),
+                            //             // focusedBorder: UnderlineInputBorder(
+                            //             //   borderSide: BorderSide(color:  Colors.white),
+                            //             // ),
+                            //             // border: UnderlineInputBorder(
+                            //             //   borderSide: BorderSide(color:  Colors.white),
+                            //             // ),
+                            //           ),
+                            //           // style: TextStyle(
+                            //           //     color: Colors.white, decorationColor: Colors.white),
+                            //           cursorColor: Color(0xFF556036),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     SizedBox(width: 20,),
+                            //     Expanded(
+                            //       flex: 2,
+                            //       child: Container(
+                            //         width: screenWidth / 3,
+                            //         decoration: BoxDecoration(
+                            //             borderRadius: BorderRadius.circular(5),color: Colors.white
+                            //         ),
+                            //         child: Padding(
+                            //           padding: const EdgeInsets.only(left: 8),
+                            //           child: TextFormField(
+                            //             controller: _educationLevelController,
+                            //             obscureText: true,
+                            //             validator: (String value) {
+                            //               if (value.isEmpty) return 'Please enter some text';
+                            //               return null;
+                            //             },
+                            //             decoration: InputDecoration(
+                            //               labelText: 'Educational Level',
+                            //               // labelStyle: TextStyle(color: Colors.white),
+                            //               // enabledBorder: UnderlineInputBorder(
+                            //               //   borderSide: BorderSide(color: Colors.white),
+                            //               // ),
+                            //               // focusedBorder: UnderlineInputBorder(
+                            //               //   borderSide: BorderSide(color:  Colors.white),
+                            //               // ),
+                            //               // border: UnderlineInputBorder(
+                            //               //   borderSide: BorderSide(color:  Colors.white),
+                            //               // ),
+                            //             ),
+                            //             // style: TextStyle(
+                            //             //     color: Colors.white, decorationColor: Colors.white),
+                            //             cursorColor: Color(0xFF556036),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(
+                            //         top: 15,
+                            //       ),
+                            //       child: ButtonTheme(
+                            //         minWidth: MediaQuery.of(context).size.width / 2,
+                            //         child: RaisedButton(
+                            //             child: Text("Create Account", style: TextStyle(color: Colors.white),),
+                            //             color: Color(0xFF556036),
+                            //             shape: RoundedRectangleBorder(
+                            //                 borderRadius: BorderRadius.circular(50.0)),
+                            //             onPressed: () async {
+                            //
+                            //               if (_formKey.currentState.validate()) {
+                            //                 // await _signUpWithEmailAndPassword();
+                            //               }
+                            //               // Navigator.pushNamed(context, "/AppHome");
+                            //             }),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(height: 10),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     // Checkbox(
+                            //     //     value: _termsCheck,
+                            //     //     onChanged: (bool terms){
+                            //     //       setState(() {
+                            //     //         _termsCheck = terms;
+                            //     //       });
+                            //     //
+                            //     //     },
+                            //     //     ),
+                            //     RichText(
+                            //       text: TextSpan(children: [
+                            //         TextSpan(
+                            //             text: "Existing sdtudent? ",
+                            //             style: TextStyle(color: Colors.black)
+                            //         ),
+                            //         TextSpan(
+                            //           text: "Login",
+                            //           recognizer: new TapGestureRecognizer()..onTap = () => {
+                            //             Navigator.pushNamed(context, "/LoginPage"),
+                            //           },
+                            //           style: TextStyle(color: Color(0xFFa39360)),
+                            //         ),
+                            //       ]),
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(height: 10,),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     // Checkbox(
+                            //     //     value: _termsCheck,
+                            //     //     onChanged: (bool terms){
+                            //     //       setState(() {
+                            //     //         _termsCheck = terms;
+                            //     //       });
+                            //     //
+                            //     //     },
+                            //     //     ),
+                            //     Expanded(
+                            //       child: RichText(
+                            //         maxLines: 4,
+                            //         softWrap: true,
+                            //         overflow: TextOverflow.ellipsis,
+                            //         text: TextSpan(children: [
+                            //           TextSpan(
+                            //               text: "By Continuing you agree to Majmaah University ",
+                            //               style: TextStyle(color: Colors.black)
+                            //           ),
+                            //           TextSpan(
+                            //             text: "Privacy Policy",
+                            //             recognizer: new TapGestureRecognizer()..onTap = () => {
+                            //               Navigator.pushNamed(context, "/PrivacyPolicyPage"),
+                            //             },
+                            //             style: TextStyle(color: Color(0xFFa39360)),
+                            //           ),
+                            //         ]),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+              Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: screenWidth / 3 * 2,
+                      height: 50,
+                      child: RaisedButton(
+                          child: Text("Log in", style: TextStyle(color: Colors.white),),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0), ),
+                          color: Color(0xFF185366),
 
-                        onPressed: () async {
+                          onPressed: () async {
 
-                          if (_formKey.currentState.validate()) {
-                            await _signInWithEmailAndPassword();
+                            if (_formKey.currentState.validate()) {
+                              await _signInWithEmailAndPassword();
 
+                            }
+
+                            // SchedulerBinding.instance.addPostFrameCallback((_) {
+                            //
+                            //   Navigator.of(context).pushNamedAndRemoveUntil(
+                            //       '/SignUpPage', (Route<dynamic> route) => false);
+                            // });
                           }
-
+                      ),
+                    ),
+                  ),
+                  bottom: 75,
+                  left: 0
+              ),
+              Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                        width: screenWidth / 3 * 2,
+                        height: 50,
+                        child: FlatButton(child: Text("Forgot your Password"), onPressed: (){
                           // SchedulerBinding.instance.addPostFrameCallback((_) {
                           //
                           //   Navigator.of(context).pushNamedAndRemoveUntil(
-                          //       '/SignUpPage', (Route<dynamic> route) => false);
+                          //       '/HomePage', (Route<dynamic> route) => false);
                           // });
-                        }
+                        }, )
                     ),
                   ),
-                ),
-                bottom: 75,
-                left: 0
-            ),
-            Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                      width: screenWidth / 3 * 2,
-                      height: 50,
-                      child: FlatButton(child: Text("Forgot your Password"), onPressed: (){
-                        // SchedulerBinding.instance.addPostFrameCallback((_) {
-                        //
-                        //   Navigator.of(context).pushNamedAndRemoveUntil(
-                        //       '/HomePage', (Route<dynamic> route) => false);
-                        // });
-                      }, )
-                  ),
-                ),
-                bottom: 0,
-                left: 0
-            ),
-            Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                      width: screenWidth / 3 * 2,
-                      height: 50,
-                      child: FlatButton(child: Text("Create account"), onPressed: (){
-                         SchedulerBinding.instance.addPostFrameCallback((_) {
+                  bottom: 0,
+                  left: 0
+              ),
+              Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                        width: screenWidth / 3 * 2,
+                        height: 50,
+                        child: FlatButton(child: Text("Create account"), onPressed: (){
+                          SchedulerBinding.instance.addPostFrameCallback((_) {
 
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              '/SignUpPage', (Route<dynamic> route) => false);
-                        });
-                      }, )
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/SignUpPage', (Route<dynamic> route) => false);
+                          });
+                        }, )
+                    ),
                   ),
-                ),
-                bottom: 25,
-                left: 0
-            )
-          ],
-          alignment: Alignment.topCenter,
+                  bottom: 25,
+                  left: 0
+              )
+            ],
+            alignment: Alignment.topCenter,
+          ),
         ),
       ),
     );
@@ -405,27 +410,27 @@ class _LoginPageState extends State<LoginPage> {
       if(user != null){
 
         // if(user.emailVerified){
-          SchedulerBinding.instance.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
 
-            Fluttertoast.showToast(
-                msg: "User Login Successful",
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 3,
-                backgroundColor: Color(0xFF556036),
-                textColor: Colors.white,
-                fontSize: 16.0
-            );
+          Fluttertoast.showToast(
+              msg: "User Login Successful",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 3,
+              backgroundColor: Color(0xFF556036),
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
 
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    NavBar(),
-              ),
-                  (route) => false,
-            );
-          });
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  NavBar(),
+            ),
+                (route) => false,
+          );
+        });
         // }else{
         //   Fluttertoast.showToast(
         //       msg: "please verify your email first",

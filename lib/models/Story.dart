@@ -1,6 +1,6 @@
 class Story {
-  String id, title, category, language;
+  String id, title, category, language, image;
 
   int educationalLevel;
-  Story();
+  Story(this.id, this.title, this.image);
 }

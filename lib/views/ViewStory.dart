@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ViewStory extends StatefulWidget {
  final String id;
- final AudioPlayer advancedPlayer;
+ // final AudioPlayer advancedPlayer;
 
 
  ViewStory (this.id);
@@ -43,8 +43,8 @@ class _ViewStoryState extends State<ViewStory> {
   super.initState();
   loadDocument();
 
-  widget.advancedPlayer.onSeekComplete
-      .listen((event) => setState(() => seekDone = true));
+  // widget.advancedPlayer.onSeekComplete
+  //     .listen((event) => setState(() => seekDone = true));
   super.initState();
 
   }
@@ -72,13 +72,13 @@ class _ViewStoryState extends State<ViewStory> {
   }
 
 
-  Future _loadFile() async {
-    //final bytes = await readBytes(Uri.parse(kUrl1));
-    await file.writeAsBytes(bytes);
-    if (await file.exists()) {
-      setState(() => localFilePath = file.path);
-    }
-  }
+  // Future _loadFile() async {
+  //   //final bytes = await readBytes(Uri.parse(kUrl1));
+  //   await file.writeAsBytes(bytes);
+  //   if (await file.exists()) {
+  //     setState(() => localFilePath = file.path);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

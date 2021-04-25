@@ -3,8 +3,9 @@ import 'package:tale_teller/views/LoginPage.dart';
 import 'package:tale_teller/views/YoungHome.dart';
 import 'Home.dart';
 import 'ProfilePage.dart';
-import 'LoginPage.dart';
+import 'Results.dart';
 import '../Global.dart';
+
 
 
 class NavBar extends StatefulWidget {
@@ -19,7 +20,7 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _children = [
     ProfilePage(),
     Home(),
-    LoginPage(),
+    Results(),
   ];
 
 
@@ -59,13 +60,11 @@ class _NavBarState extends State<NavBar> {
 
             icon: IconButton(
               icon: Icon(
-                Icons.logout,
+                Icons.addchart_rounded,
               ),
-              onPressed: () {
-                Global.auth.signOut();
-              },
+
             ),
-            title: new Text("Logout"),
+            title: new Text("Result"),
 
 
 

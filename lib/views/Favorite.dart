@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tale_teller/models/Story.dart';
 
 final firestoreInstance = FirebaseFirestore.instance;
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,68 +15,108 @@ class Favorite extends StatefulWidget {
 }
 //
 class _FavoriteState extends State<Favorite> {
-  FirebaseAuth user;
+  User user;
   double screenHeight;
   double screenWidth;
-  int _bottomNavigationBar = 1;
-  int tabindex = 1;
-  Widget _bodyWidget;
-  List<Widget> FavoriteWidgetsList = [];
+
+  List favList = List();
+  List<Story> dataList = [];
+  String message = "";
+  Story data;
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+  void initState() {
+    super.initState();
+    initUser();
   }
-//
-//   List<Favorites> _favorites;
-//
-//   @override
-//   void initState(){
-//     super.initState();
-//     _favorites=[];
-//   }
-//   //Firebase
-//   CollectionReference Favorite = FirebaseFirestore.instance.collection('');
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     screenHeight = MediaQuery
-//         .of(context)
-//         .size
-//         .height;
-//     screenWidth = MediaQuery
-//         .of(context)
-//         .size
-//         .width;
-//
-//     return Scaffold(
-//       body: Container(height: screenHeight,
-//         width: screenWidth,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//               image: AssetImage("assets/images/Favorite list.png"),
-//               fit: BoxFit.cover
-//           ),
-//         ),
-//
-//         child: Column(
-//           children: <Widget>[
-//             Center(child: Text("Favorite Stories")),
-//
-//         ListView()
-//                 itemCount: _favorites.length,
-//                 itemBuilder: _, index){
-//
-//              return ListTile(
-//               leading: Icon(Icons.favorite),
-//               title: Text(_favorites[index].title)
-//               //onTap:() {},);
-//             },
-//     ),
-//     ],
-//     ),
-//       ),);
-//
-//       }
+
+  initUser() async {
+    user = await _auth.currentUser;
+    setState(() {
+    });
+    await firestoreInstance.collection("FavoriteList").doc(user?.uid).get().then((value) {
+      setState(() {
+        favList.addAll(value.data()["list"]);
+        initData();
+      });
+    });
+  }
+
+  initData() async {
+    if (favList.isEmpty) {
+      setState(() {
+        Text("You didn't favorite any story");
+      });
+    }
+    for (var i = 0; i < favList.length; i++) {
+      FirebaseFirestore.instance.collection('Story').doc(favList[i].toString()).get().then((value) {
+        setState(() {
+          data = new Story(
+            favList[i].toString(),
+            value["Title"],
+            value["img"],
+          );
+          dataList.add(data);
+
+        });
+      });
+    }
+  }
+
+  updateList() {
+    DocumentReference documentReference =
+    FirebaseFirestore.instance.collection("FavoriteList").doc(user?.uid);
+    //map
+    Map<String, dynamic> mylist = {"list": favList};
+    documentReference.set(mylist).whenComplete(() {});
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, //change your color here
+        ),
+        centerTitle: true,
+        title: Text('Favorite list',
+            style: TextStyle(color: Colors.white, fontSize: 20)),
+        backgroundColor: Color(0xffB9C559),
+      ),
+      body:  dataList.length == 0
+          ? Center(
+          child: Text("Nothing in your favorite list ",
+              style: TextStyle(fontSize: 20)))
+          : ListView.builder(
+          itemCount: dataList.length,
+          itemBuilder: (_, index) {
+            return Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              color: Colors.white,
+              elevation: 2,
+              margin: EdgeInsets.all(10),
+              child: ListTile(
+                  title: Text(
+                    dataList[index].title,
+                    textAlign: TextAlign.right,
+                  ),
+                  leading: IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      setState(() {
+                        favList.removeAt(index);
+                        dataList.removeAt(index);
+                        updateList();
+                      });
+                    },
+                  ),
+                  trailing: Image.network(
+                    dataList[index].image,
+                  )),
+            );
+          }),
+    );
+  }
+
 }
