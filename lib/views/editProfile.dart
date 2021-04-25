@@ -214,47 +214,7 @@ class _editProfileState extends State<editProfile> {
                                   ),
                                 ),
                                 SizedBox(width: 20,),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    width: screenWidth / 3,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),color: Colors.white
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: TextFormField(
-                                        controller: _educationLevelController,
-                                        // obscureText: true,
-                                        validator: (String value) {
-                                          if (value.isEmpty) return 'Please enter your educational level';
-                                          return null;
-                                        },
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          disabledBorder: InputBorder.none,
-                                          labelText: 'Educational Level',
-                                          // labelStyle: TextStyle(color: Colors.white),
-                                          // enabledBorder: UnderlineInputBorder(
-                                          //   borderSide: BorderSide(color: Colors.white),
-                                          // ),
-                                          // focusedBorder: UnderlineInputBorder(
-                                          //   borderSide: BorderSide(color:  Colors.white),
-                                          // ),
-                                          // border: UnderlineInputBorder(
-                                          //   borderSide: BorderSide(color:  Colors.white),
-                                          // ),
-                                        ),
-                                        // style: TextStyle(
-                                        //     color: Colors.white, decorationColor: Colors.white),
-                                        cursorColor: Color(0xFF556036),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+
                               ],
                             ),
                             // Row(
@@ -365,7 +325,7 @@ class _editProfileState extends State<editProfile> {
                           color: Color(0xFF185366),
 
                           onPressed: () async {
-
+                            await _editProfile1();
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -396,16 +356,13 @@ class _editProfileState extends State<editProfile> {
   }
 
   Future<void> _editProfile1() async {
-    EmailAuthCredential credential = EmailAuthProvider.credential( email: _usernameController.text + "@taleteller.edu",
-      password: _passwordController.text,);
+   await  user.updateEmail(_usernameController.text + "@taleteller.edu");
+   await user.updatePassword(_passwordController.text);
 
-    await FirebaseAuth.instance.currentUser.reauthenticateWithCredential(credential);
-    DocumentReference documentReference = collRef.doc(user.uid);
-    documentReference.set({
-      'Username': _usernameController.text,
-      'Age':   _ageController.text,//_ageController.value,
-
-    });
+    await FirebaseFirestore.instance.collection('Userinfo').doc(user.uid).update({'Username': _usernameController.text,
+        'Age':   _ageController.text,//_ageController.value,
+         });
+   await user.reload();
 
     // Navigator.pushNamed(context, "/HomePage");
     // await Global.auth.currentUser.updateProfile(displayName: _nameController.text);
