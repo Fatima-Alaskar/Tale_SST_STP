@@ -94,7 +94,7 @@ class _SearchPageState extends State<SearchPage> {
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 // import 'preschoolerHome.dart';
-// import 'NavigationBar.dart';
+// import 'NavBar.dart';
 // import 'package:tale_teller/models//Story.dart';
 //
 //

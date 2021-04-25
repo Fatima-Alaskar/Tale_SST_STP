@@ -6,7 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Global.dart';
-import 'NavigationBar.dart';
+import 'NavBar.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
