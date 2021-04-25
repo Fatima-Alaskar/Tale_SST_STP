@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tale_teller/views/LoginPage.dart';
 import 'preschoolerHome.dart';
 import '../Global.dart';
+import 'YoungHome.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -89,14 +90,13 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: FlatButton(
                   onPressed: (){
-
                     if (ValidAge()){
-                      Navigator.pushNamed(context, '/YoungHome');
-
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => YoungHome()),
+                    );}
                     else {
-                      AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}
-                  },
+                      AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}},
                   child: Image(image: AssetImage("assets/images/ypung.png")),
 
                 ),),

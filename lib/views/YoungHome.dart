@@ -14,12 +14,12 @@ import 'StoryDetails.dart';
 import '../models/UserStory.dart';
 import 'SearchYoung.dart';
 
-class HomePage extends StatefulWidget {
+class YoungHome extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _YoungHomeState createState() => _YoungHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _YoungHomeState extends State<YoungHome> {
 
   double screenHeight;
   double screenWidth;
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
   //   refreshData();
   // }
 
-  _HomePageState(){
+  _YoungHomeState(){
     getStories();
   }
 
