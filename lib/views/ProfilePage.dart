@@ -46,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
 
       appBar: AppBar(
+        backgroundColor: Color(0xFF0DB4EA) ,
         actions: [
           IconButton(
               icon: Icon(Icons.arrow_back_rounded),
@@ -70,6 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
         height: screenHeight,
         width: screenWidth,
+        padding: const EdgeInsets.fromLTRB(0,150,0,50),
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/Profile +logout.png"),
@@ -77,48 +79,47 @@ class _ProfilePageState extends State<ProfilePage> {
             )
         ),
         child: ListView(children: <Widget>[
-          Container(
-            child:
-            Text(name,
+
+          Center(
+
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+            Card(
+            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+          child: ListTile(
+            leading: Icon(
+                Icons.circle,
+                color: Color(0xFF185366)),
+            title:  Text('username: '+name,
               textAlign: TextAlign.center,),
-          ),
-          Container(
-            child:
-            Text(age,
-              textAlign: TextAlign.center,),
-          ),
-          Container(
-            child:
-            Text(user?.email,
-              textAlign: TextAlign.center,),
+            ),),
+                Card(
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  child: ListTile(
+                    leading: Icon(
+                        Icons.circle,
+                        color: Color(0xFF185366)),
+                    title: Text('Age: '+age,
+                      textAlign: TextAlign.center,),
+                  ),),
+                Card(
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  child: ListTile(
+                    leading: Icon(
+                        Icons.circle,
+                        color: Color(0xFF185366)),
+                    title: Text('Email: '+user?.email,
+                      textAlign: TextAlign.center,),
+                  ),),
+              ],
+
+            ),
           ),
 
-          // UserAccountsDrawerHeader(
-          //   accountName: Text(
-          //     "${user?.displayName}",
-          //     textAlign: TextAlign.center,
-          //
-          //   ),
-          // accountEmail: Text(
-          //   "${user?.email}",
-          //   textAlign: TextAlign.right,
-          // ),
-          // accountEmail:Text(
-          //   age
-          //     ),
-          //     currentAccountPicture: CircleAvatar(
-          //       backgroundColor: Colors.grey,
-          //       child: Text(
-          //         user.displayName.characters.first,
-          //         style: TextStyle(fontSize: 40.0, color: Colors.white),
-          //       ),
-          //     ),
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     //image: NetworkImage("${user?.photoUrl}"),
-          //   ),
-          //   // ),
-          // ),
+
 
         ]
 

@@ -14,18 +14,13 @@ class StoryPage extends StatefulWidget {
   UserStory currentStory;
 
 
-  StoryPage.UserStory(String storyID, UserStory currentStory){
-
-    // print("story object: " +currentStory.title);
-
+  StoryPage.userstory(String storyID, UserStory currentStory){
     this.storyPageID = storyID;
     this.currentStory = currentStory;
-
-    // print("This story object: " +this.currentStory.title);
   }
 
   @override
-  _StoryPageState createState() => _StoryPageState.UserStory(storyPageID, currentStory);
+  _StoryPageState createState() => _StoryPageState.userstory(storyPageID, currentStory);
 }
 
 enum TtsState { playing, stopped, paused, continued }
@@ -53,16 +48,14 @@ class _StoryPageState extends State<StoryPage> {
   stt.SpeechToText speech = stt.SpeechToText();
   FlutterTts flutterTts = FlutterTts();
   TtsState ttsState = TtsState.stopped;
-  
-  _StoryPageState.UserStory(String storyID, UserStory currentStory){
+
+  _StoryPageState.userstory(String storyID, UserStory currentStory){
     this.storyPageID = storyID;
     this.currentStory = currentStory;
 
-    getStoryInfo();
+    getStoryInfo(); }
 
-  }
-  
-  
+
   @override
   Widget build(BuildContext context) {
 
@@ -86,9 +79,9 @@ class _StoryPageState extends State<StoryPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                      Text("Main Story Content", style: TextStyle(fontSize: 20),),
+                        Text("Main Story Content", style: TextStyle(fontSize: 20),),
 
-                    ],),
+                      ],),
                   ),
                   Divider(color: Colors.grey, height: 3,),
                   SingleChildScrollView(
@@ -182,7 +175,7 @@ class _StoryPageState extends State<StoryPage> {
     String text;
 
     await FirebaseFirestore.instance
-        .collection('Story')
+        .collection("UserStory")
         .doc(currentStory.id)
         .collection('pages').doc(storyPageID).get()
         .then((value) => {
@@ -213,15 +206,12 @@ class _StoryPageState extends State<StoryPage> {
   }
 
   void errorListener(SpeechRecognitionError error) {
-    // print("Received error status: $error, listening: ${speech.isListening}");
     setState(() {
       lastError = '${error.errorMsg} - ${error.permanent}';
     });
   }
 
   void statusListener(String status) {
-    // print(
-    // 'Received listener status: $status, listening: ${speech.isListening}');
     setState(() {
       lastStatus = '$status';
     });
@@ -238,10 +228,6 @@ class _StoryPageState extends State<StoryPage> {
 
 
   Future _speak() async {
-    // await flutterTts.setVolume(volume);
-    // await flutterTts.setSpeechRate(rate);
-    // await flutterTts.setPitch(pitch);
-
     if (pageText != null) {
       if (pageText.isNotEmpty) {
         await flutterTts.awaitSpeakCompletion(true);

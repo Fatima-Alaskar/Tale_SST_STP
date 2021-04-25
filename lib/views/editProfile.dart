@@ -77,7 +77,7 @@ class _editProfileState extends State<editProfile> {
                             SizedBox(height: 20,),
 
                             Container(
-                              // color: Colors.white,
+
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),color: Colors.white
                               ),
@@ -96,41 +96,18 @@ class _editProfileState extends State<editProfile> {
                                     enabledBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
-                                    // enabledBorder: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(color: Colors.white),
-                                    // ),
+
                                     labelText: 'Username',
-                                    // labelStyle: TextStyle(
-                                    //     color: Colors.white),
+
                                   ),
 
-                                  // style: TextStyle(
-                                  //     color: Colors.white, decorationColor: Colors.white),
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
                             ),
 
                             SizedBox(height: 20,),
-                            // TextFormField(
-                            //   controller: _emailController,
-                            //   validator: (String value) {
-                            //     if (value.isEmpty) return 'Please enter some text';
-                            //     if (!value.contains('@')) return 'Please use University Email';
-                            //     return null;
-                            //   },
-                            //   decoration: InputDecoration(
-                            //     // enabledBorder: UnderlineInputBorder(
-                            //     //   // borderSide: BorderSide(color: Colors.white),
-                            //     // ),
-                            //     labelText: 'University Email',
-                            //     // labelStyle: TextStyle(
-                            //     //     color: Colors.white),
-                            //   ),
-                            //   // style: TextStyle(
-                            //   //     color: Colors.white, decorationColor: Colors.white),
-                            //   cursorColor: Color(0xFF556036),
-                            // ),
+
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),color: Colors.white
@@ -151,16 +128,7 @@ class _editProfileState extends State<editProfile> {
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
                                     labelText: 'Password',
-                                    // labelStyle: TextStyle(color: Colors.white),
-                                    // enabledBorder: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(color: Colors.white),
-                                    // ),
-                                    // focusedBorder: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(color:  Colors.white),
-                                    // ),
-                                    // border: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(color:  Colors.white),
-                                    // ),
+
                                   ),
                                   // style: TextStyle(
                                   //     color: Colors.white, decorationColor: Colors.white),
@@ -196,16 +164,7 @@ class _editProfileState extends State<editProfile> {
                                         disabledBorder: InputBorder.none,
                                         labelText: 'Age',
 
-                                        // labelStyle: TextStyle(color: Colors.white),
-                                        // enabledBorder: UnderlineInputBorder(
-                                        //   borderSide: BorderSide(color: Colors.white),
-                                        // ),
-                                        // focusedBorder: UnderlineInputBorder(
-                                        //   borderSide: BorderSide(color:  Colors.white),
-                                        // ),
-                                        // border: UnderlineInputBorder(
-                                        //   borderSide: BorderSide(color:  Colors.white),
-                                        // ),
+
                                       ),
                                       // style: TextStyle(
                                       //     color: Colors.white, decorationColor: Colors.white),
@@ -217,96 +176,7 @@ class _editProfileState extends State<editProfile> {
 
                               ],
                             ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     Padding(
-                            //       padding: const EdgeInsets.only(
-                            //         top: 15,
-                            //       ),
-                            //       child: ButtonTheme(
-                            //         minWidth: MediaQuery.of(context).size.width / 2,
-                            //         child: RaisedButton(
-                            //             child: Text("Create Account", style: TextStyle(color: Colors.white),),
-                            //             color: Color(0xFF556036),
-                            //             shape: RoundedRectangleBorder(
-                            //                 borderRadius: BorderRadius.circular(50.0)),
-                            //             onPressed: () async {
-                            //
-                            //               if (_formKey.currentState.validate()) {
-                            //                 // await _signUpWithEmailAndPassword();
-                            //               }
-                            //               // Navigator.pushNamed(context, "/AppHome");
-                            //             }),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(height: 10),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     // Checkbox(
-                            //     //     value: _termsCheck,
-                            //     //     onChanged: (bool terms){
-                            //     //       setState(() {
-                            //     //         _termsCheck = terms;
-                            //     //       });
-                            //     //
-                            //     //     },
-                            //     //     ),
-                            //     RichText(
-                            //       text: TextSpan(children: [
-                            //         TextSpan(
-                            //             text: "Existing sdtudent? ",
-                            //             style: TextStyle(color: Colors.black)
-                            //         ),
-                            //         TextSpan(
-                            //           text: "Login",
-                            //           recognizer: new TapGestureRecognizer()..onTap = () => {
-                            //             Navigator.pushNamed(context, "/LoginPage"),
-                            //           },
-                            //           style: TextStyle(color: Color(0xFFa39360)),
-                            //         ),
-                            //       ]),
-                            //     ),
-                            //   ],
-                            // ),
-                            // SizedBox(height: 10,),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     // Checkbox(
-                            //     //     value: _termsCheck,
-                            //     //     onChanged: (bool terms){
-                            //     //       setState(() {
-                            //     //         _termsCheck = terms;
-                            //     //       });
-                            //     //
-                            //     //     },
-                            //     //     ),
-                            //     Expanded(
-                            //       child: RichText(
-                            //         maxLines: 4,
-                            //         softWrap: true,
-                            //         overflow: TextOverflow.ellipsis,
-                            //         text: TextSpan(children: [
-                            //           TextSpan(
-                            //               text: "By Continuing you agree to Majmaah University ",
-                            //               style: TextStyle(color: Colors.black)
-                            //           ),
-                            //           TextSpan(
-                            //             text: "Privacy Policy",
-                            //             recognizer: new TapGestureRecognizer()..onTap = () => {
-                            //               Navigator.pushNamed(context, "/PrivacyPolicyPage"),
-                            //             },
-                            //             style: TextStyle(color: Color(0xFFa39360)),
-                            //           ),
-                            //         ]),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
+
                           ],
                         )),
                   )
@@ -334,11 +204,7 @@ class _editProfileState extends State<editProfile> {
                               ),
                                   (route) => false,
                             );
-                            // SchedulerBinding.instance.addPostFrameCallback((_) {
-                            //
-                            //   Navigator.of(context).pushNamedAndRemoveUntil(
-                            //       '/SignUpPage', (Route<dynamic> route) => false);
-                            // });
+
                           }
                       ),
                     ),
@@ -364,25 +230,6 @@ class _editProfileState extends State<editProfile> {
          });
    await user.reload();
 
-    // Navigator.pushNamed(context, "/HomePage");
-    // await Global.auth.currentUser.updateProfile(displayName: _nameController.text);
 
-    // user.sendEmailVerification().whenComplete(() => {
-    //   Fluttertoast.showToast(
-    //       msg: "User Created Successfully, and verification email is sent",
-    //       toastLength: Toast.LENGTH_LONG,
-    //       gravity: ToastGravity.BOTTOM,
-    //       timeInSecForIosWeb: 3,
-    //       backgroundColor: Color(0xFF556036),
-    //       textColor: Colors.white,
-    //       fontSize: 16.0
-    //   )
-    // });
-
-//      Scaffold.of(context).showSnackBar(
-//        const SnackBar(
-//          content: Text('Failed to sign in with Email & Password'),
-//        ),
-//      );
   }
 }

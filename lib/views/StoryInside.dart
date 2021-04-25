@@ -91,13 +91,3 @@ class _StoryInsideState extends State<StoryInside> {
 
   }
 }
-
-
-// Align(
-// alignment: Alignment.topCenter,
-// child: Image.network(
-// //used_car.imageUrl,fit: BoxFit.fill
-// // TODO: Should we add stream bulider?
-// snapshots.data["img"][index].Images,
-// ),
-// ),

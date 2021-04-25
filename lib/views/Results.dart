@@ -13,26 +13,23 @@ class _ResultsState extends State<Results> {
   double screenWidth;
   User user;
   double Lscore;
-  double Rscore;
+  String Rscore;
 
-  // void initState() {
-  //   super.initState();
-  //   initUser();
-  // }
-  // initUser() async {
-  //   user = await _auth.currentUser;
-  //   FirebaseFirestore.instance.collection("listeningScore").doc(user.uid).get().then((value){
-  //     FirebaseFirestore.instance.collection("ReadingScore").doc(user.uid).get().then((value){
-  //       setState(() {
-  //       Lscore = value.data["listeningScore"].toDouble();
-  //     },
-  //
-  //     setState(() {
-  //         Rscore= value.data["ReadScore"].toDouble();
-  //       });
-  //     }
-  //   });
-  // }
+  void initState() {
+    super.initState();
+    initUser();
+  }
+
+  initUser() async {
+    user = await _auth.currentUser;
+    FirebaseFirestore.instance.collection("ReadingScore").doc(user?.uid).get().then((value) {
+      setState(() {
+        Rscore=value.data()["ReadingScore"].toString();
+      });
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +39,7 @@ class _ResultsState extends State<Results> {
       return Scaffold(
         resizeToAvoidBottomInset: false,
           appBar: AppBar(
+            backgroundColor: Color(0xFF0DB4EA) ,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
@@ -67,7 +65,7 @@ class _ResultsState extends State<Results> {
               leading: Icon(
               Icons.audiotrack,
               color: Color(0xFF185366)),
-              title: Text('Listening Score',
+              title: Text('Listening Score : 4377',
               style: TextStyle(
               fontSize: 20.0,),))),
                Card(
@@ -76,7 +74,7 @@ class _ResultsState extends State<Results> {
                 leading: Icon(
                     Icons.auto_stories,
                     color: Color(0xFF185366)),
-                title: Text('reading Score',
+                title: Text('Reading score : 3049',
                   style: TextStyle(
                     fontSize: 20.0,),))),
                Card(
@@ -85,7 +83,7 @@ class _ResultsState extends State<Results> {
                 leading: Icon(
                     Icons.cast_for_education,
                     color: Color(0xFF185366)),
-                title: Text('Educational level',
+                title: Text('Educational level: 5',
                   style: TextStyle(
                     fontSize: 20.0,),))),
                Card(

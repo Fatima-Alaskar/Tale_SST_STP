@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-//import '../models/Story.dart';
 import '../models/UserStory.dart';
 
 import 'StoryDetails.dart';
@@ -20,9 +19,9 @@ class _NewStoryState extends State<NewStory> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _educationLevelController =
-      TextEditingController();
+  TextEditingController();
 
-  
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -53,15 +52,7 @@ class _NewStoryState extends State<NewStory> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     Text("Add Story",style: TextStyle(fontSize: 28, color: Colors.white),)
-                            //   ],
-                            // ),
-                            // SizedBox(height: 20,),
                             Container(
-                              // color: Colors.white,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),
                                   color: Colors.white),
@@ -71,7 +62,7 @@ class _NewStoryState extends State<NewStory> {
                                   controller: _titleController,
                                   validator: (String value) {
                                     if (value.isEmpty)
-                                      return 'Please enter some text';
+                                      return 'Ops! Enter title';
                                     return null;
                                   },
                                   decoration: InputDecoration(
@@ -82,8 +73,6 @@ class _NewStoryState extends State<NewStory> {
                                     disabledBorder: InputBorder.none,
                                     labelText: 'Story Title',
                                   ),
-                                  // style: TextStyle(
-                                  //     color: Colors.white, decorationColor: Colors.white),
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
@@ -102,7 +91,7 @@ class _NewStoryState extends State<NewStory> {
                                   // obscureText: true,
                                   validator: (String value) {
                                     if (value.isEmpty)
-                                      return 'Please enter some text';
+                                      return 'Ops! Enter category';
                                     return null;
                                   },
                                   decoration: InputDecoration(
@@ -113,8 +102,6 @@ class _NewStoryState extends State<NewStory> {
                                     disabledBorder: InputBorder.none,
                                     labelText: 'Story Category',
                                   ),
-                                  // style: TextStyle(
-                                  //     color: Colors.white, decorationColor: Colors.white),
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
@@ -136,7 +123,7 @@ class _NewStoryState extends State<NewStory> {
                                       // obscureText: true,
                                       validator: (String value) {
                                         if (value.isEmpty)
-                                          return 'Please enter some text';
+                                          return 'Ops! Enter language of the story';
                                         return null;
                                       },
                                       decoration: InputDecoration(
@@ -167,7 +154,7 @@ class _NewStoryState extends State<NewStory> {
                                         controller: _educationLevelController,
                                         validator: (String value) {
                                           if (value.isEmpty)
-                                            return 'Please enter some text';
+                                            return 'Ops! enter educational level';
                                           return null;
                                         },
                                         decoration: InputDecoration(
@@ -236,7 +223,7 @@ class _NewStoryState extends State<NewStory> {
     currentStory.language = _languageController.text;
     currentStory.educationalLevel = eduLevel;
 
-    final collRef = FirebaseFirestore.instance.collection('Story');
+    final collRef = FirebaseFirestore.instance.collection('UserStory');
     DocumentReference documentReference = collRef.doc();
 
 
@@ -246,18 +233,9 @@ class _NewStoryState extends State<NewStory> {
       'Language': _languageController.text,
       'EducationLevel': eduLevel,
     }).whenComplete(() => {
-    // print("story object: " +currentStory.title)
-    Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.Userstory(documentReference.id,currentStory))),
-      // print("Document ID: "+documentReference.id),
-      // print("test")
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(documentReference.id,currentStory))),
     });
-        
-    //     .then((value) => {
-    //   DocumentSnapshot data = value,
-    //   print(value),
-    //   Navigator.pushReplacement(context,
-    //       MaterialPageRoute(builder: (BuildContext context) => StoryDetails(value)))
-    // });
+
   }
 }

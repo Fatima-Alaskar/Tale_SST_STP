@@ -90,13 +90,15 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: FlatButton(
                   onPressed: (){
-                    if (ValidAge()){
+                    // if (ValidAge()){
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => YoungHome()),
-                    );}
-                    else {
-                      AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}},
+                    );
+                    //}
+                    // else {
+                    //   AlertDialog(title: Text("Oops! you are not allowed to Open this library. "));}
+                    },
                   child: Image(image: AssetImage("assets/images/ypung.png")),
 
                 ),),

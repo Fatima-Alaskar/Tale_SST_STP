@@ -14,19 +14,15 @@ class StoryDetails extends StatefulWidget {
   UserStory currentStory;
 
 
-  StoryDetails.Userstory(String storyID, UserStory currentStory){
-
-    // print("story object: " +currentStory.title);
+  StoryDetails.userstory(String storyID, UserStory currentStory){
 
     this.storyID = storyID;
     this.currentStory = currentStory;
-
-    // print("This story object: " +this.currentStory.title);
   }
 
 
   @override
-  _StoryDetailsState createState() =>  _StoryDetailsState.UserStory(storyID, currentStory);
+  _StoryDetailsState createState() =>  _StoryDetailsState.userstory(storyID, currentStory);
 }
 
 class _StoryDetailsState extends State<StoryDetails> {
@@ -45,7 +41,7 @@ class _StoryDetailsState extends State<StoryDetails> {
 
   Widget StoryPages;
 
-  _StoryDetailsState.UserStory(String storyID, UserStory currentStory){
+  _StoryDetailsState.userstory(String storyID, UserStory currentStory){
     this.storyID = storyID;
     this.currentStory = currentStory;
 
@@ -103,8 +99,6 @@ class _StoryDetailsState extends State<StoryDetails> {
 
   getOCRData() async {
 
-    // List<Widget> lines = new List();
-
     await getImage();
     final FirebaseVisionImage visionImage = FirebaseVisionImage.fromFile(imageFile);
     final TextRecognizer textRecognizer = FirebaseVision.instance.textRecognizer();
@@ -122,8 +116,6 @@ class _StoryDetailsState extends State<StoryDetails> {
       final List<RecognizedLanguage> languages = block.recognizedLanguages;
 
 
-
-
       for (TextLine line in block.lines) {
         lineText = lineText + " ";
         for (TextElement element in line.elements) {
@@ -132,36 +124,16 @@ class _StoryDetailsState extends State<StoryDetails> {
 
       }
 
-
-
-      // saveStoryPageText(lineText);
-
     }
 
     saveStoryPageText(lineText);
-    // print(lineText);
 
-    // await Firebase.initializeApp();
-    // FirebaseFirestore.instance
-    //     .collection('test')
-    // .doc("1")
-    // // .where("ownerID", isEqualTo: "$userID")
-    //     .snapshots()
-    //     .listen((data) => setState(() {
-    //   name =  data.get("name");
-    //   // for (int i = 0; i < data.docs.length; i++) {
-    //   //   // Create ITem with its main info
-    //   //   Lawyer tempLawyer =
-    //   //   Lawyer.convertDocumentSnapshotToItem(data.docs[i]);
-    //   //   lawyer = tempLawyer;
-    //   // }
-    // }));
   }
   getStoryInfo() {
     FirebaseFirestore.instance
-        .collection('Story')
-    .doc(currentStory.id)
-    .collection('pages')
+        .collection("UserStory")
+        .doc(currentStory.id)
+        .collection('pages')
         .snapshots()
         .listen((documentSnapshot) => setState((){
 
@@ -185,31 +157,30 @@ class _StoryDetailsState extends State<StoryDetails> {
                   height: 50,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 50,
-                          height: 50,
-                          color: Color(0xFF185366),
-                          child: Center(child: Text(pageNumber.toString(), style: TextStyle(color: Colors.white),)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8,right: 8),
-                          child: Container(child: Text(storyPageText,overflow: TextOverflow.ellipsis,),width: screenWidth - 90,),
-                        )
-                      ],
-                    ),
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        color: Color(0xFF185366),
+                        child: Center(child: Text(pageNumber.toString(), style: TextStyle(color: Colors.white),)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8,right: 8),
+                        child: Container(child: Text(storyPageText,overflow: TextOverflow.ellipsis,),width: screenWidth - 90,),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-                onTap: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (BuildContext context) => StoryPage.UserStory(fireBaseDocument.id,currentStory)));
-                },
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext context) => StoryPage.userstory(fireBaseDocument.id,currentStory)));
+            },
           );
           storyPageWidgetsList.add(storyPageWidget);
         });
 
-        // storyList.add(story);
       }
 
       setState(() {
@@ -230,18 +201,16 @@ class _StoryDetailsState extends State<StoryDetails> {
   }
 
   saveStoryPageText(String storyPageText){
-    final collRef = FirebaseFirestore.instance.collection('Story').doc(currentStory.id).collection('pages');
+    final collRef = FirebaseFirestore.instance.collection("UserStory").doc(currentStory.id).collection('pages');
     DocumentReference documentReference = collRef.doc();
 
 
     documentReference.set({
       'storyPageText': storyPageText.toString()
     }).whenComplete(() => {
-      // print("story object: " +currentStory.title)
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.Userstory(documentReference.id,currentStory))),
-      // print("Document ID: "+documentReference.id),
-      // print("test")
+          MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(documentReference.id,currentStory))),
+
     });
   }
 

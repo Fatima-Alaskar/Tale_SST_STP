@@ -8,7 +8,7 @@ import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
 class ViewStory extends StatefulWidget {
  final String id;
- // final AudioPlayer advancedPlayer;
+
 
 
  ViewStory (this.id);
@@ -27,7 +27,7 @@ class _ViewStoryState extends State<ViewStory> {
   String id;
   int LScore;
 
-  // PDFDocument document;
+
 
   String PDF;
   String audio;
@@ -36,8 +36,6 @@ class _ViewStoryState extends State<ViewStory> {
   bool seekDone;
   bool player=false;
   User user;
-  // AudioCache audioCache = AudioCache();
-  // AudioPlayer advancedPlayer = AudioPlayer();
 
 
   @override
@@ -45,8 +43,7 @@ class _ViewStoryState extends State<ViewStory> {
   super.initState();
   loadDocument();
 
-  // widget.advancedPlayer.onSeekComplete
-  //     .listen((event) => setState(() => seekDone = true));
+
   super.initState();
 
   }
@@ -86,7 +83,7 @@ calScore() async{
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-
+        backgroundColor: Color(0xFF0DB4EA) ,
         leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () => Navigator.of(context).pop(),

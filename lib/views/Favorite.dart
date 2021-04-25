@@ -103,6 +103,7 @@ class _FavoriteState extends State<Favorite> {
                   ),
                   leading: IconButton(
                     icon: Icon(Icons.favorite),
+                    color: Colors.red,
                     onPressed: () {
                       setState(() {
                         favList.removeAt(index);

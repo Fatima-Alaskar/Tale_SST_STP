@@ -57,6 +57,7 @@ class _PreShoolerState extends State<PreShooler> {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          backgroundColor: Color(0xFF0DB4EA) ,
           title: Center(child: Text('Preschooler Library')),
           actions: <Widget>[
             IconButton(

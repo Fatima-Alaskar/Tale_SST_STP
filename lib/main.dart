@@ -45,10 +45,6 @@ class MyApp extends StatelessWidget {
         '/Results': (BuildContext context) => Results(),
 
 
-
-
-        // '/ContactUsPage': (BuildContext context) => ContactUsPage(),
-        // '/PrivacyPolicyPage': (BuildContext context) => PrivacyPolicyPage(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
