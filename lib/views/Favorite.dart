@@ -80,7 +80,7 @@ class _FavoriteState extends State<Favorite> {
         centerTitle: true,
         title: Text('Favorite list',
             style: TextStyle(color: Colors.white, fontSize: 20)),
-        backgroundColor: Color(0xffB9C559),
+        backgroundColor: Color(0xFF0DB4EA) ,
       ),
       body:  dataList.length == 0
           ? Center(

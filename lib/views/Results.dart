@@ -46,7 +46,8 @@ class _ResultsState extends State<Results> {
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            title: Text("Results"),
+            title: Text("Results", style:TextStyle(
+    fontSize: 10.0),),
             centerTitle: true,
           ),
           body: Container(
