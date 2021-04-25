@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 //import 'package:audioplayers/audioplayers.dart';
 //import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
 class ViewStory extends StatefulWidget {
  final String id;
@@ -18,15 +18,15 @@ class ViewStory extends StatefulWidget {
 
 class _ViewStoryState extends State<ViewStory> {
   _ViewStoryState(this.id);
-
+  bool _isLoading = true;
+  PDFDocument document;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   double screenHeight;
   double screenWidth;
   String id;
   int LScore;
 
-  bool _isLoading = true;
-  PDFDocument document;
+  // PDFDocument document;
 
   String PDF;
   String audio;
@@ -51,22 +51,25 @@ class _ViewStoryState extends State<ViewStory> {
 
   loadDocument() async {
    await FirebaseFirestore.instance.collection('Story').doc(id.toString()).get().then((value) {
-      setState(() {
+
+     setState(() {
         PDF=value.data()["Story"];
         //audio=value.data()["Audio"];
-        print(PDF +"++++++++++++++++++++++++++++++++++++++++++++++");
+
       });
     });
-    print(PDF+"-----------------------------------------------------");
    document = await PDFDocument.fromURL(
-       "http://conorlastowka.com/book/CitationNeededBook-Sample.pdf",
-        cacheManager: CacheManager(
-          Config(
-            "customCacheKey",
-            stalePeriod: const Duration(days: 2),
-            maxNrOfCacheObjects: 10,
-          ),
-        ), );
+       PDF);
+
+   // // document = await PDFDocument.fromURL(
+   // //     "http://conorlastowka.com/book/CitationNeededBook-Sample.pdf",
+   // //      cacheManager: CacheManager(
+   // //        Config(
+   // //          "customCacheKey",
+   // //          stalePeriod: const Duration(days: 2),
+   // //          maxNrOfCacheObjects: 10,
+   // //        ),
+   //      ), );
 
     setState(() => _isLoading = false);
   }
@@ -96,6 +99,7 @@ class _ViewStoryState extends State<ViewStory> {
 
         body: SingleChildScrollView(
           child: Container(
+
             height: screenHeight,
             width: screenWidth,
 
@@ -105,58 +109,11 @@ class _ViewStoryState extends State<ViewStory> {
                     fit: BoxFit.cover
                 ),
             ),
-              child: Column(
-                  children: [
-                    Container(
-                      child: _isLoading
-                          ? Center(child: CircularProgressIndicator())
-                          : PDFViewer(
-                        document: document,
-                        zoomSteps: 1,
-                        //uncomment below line to preload all pages
-                         //lazyLoad: false,
-                        // uncomment below line to scroll vertically
-                        // scrollDirection: Axis.vertical,
-                        //uncomment below code to replace bottom navigation with your own
-                         navigationBuilder:
-                        (context, page, totalPages, jumpToPage, animateToPage) {
-                      return ButtonBar(
-                        alignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.first_page),
-                            onPressed: () {
-                              jumpToPage(page: 0);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: () {
-                              animateToPage(page: page - 2);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward),
-                            onPressed: () {
-                              animateToPage(page: page);
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.last_page),
-                            onPressed: () {
-                              jumpToPage(page: totalPages - 1);
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                      ),
-
-                    ),
-                    Container(),
-
-
-    ],),
+            child:
+            Center(
+                child: _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : PDFViewer(document: document)),
                       ),
         ),
               ); //}
