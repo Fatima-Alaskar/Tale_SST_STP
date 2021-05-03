@@ -19,9 +19,9 @@ class _NewStoryState extends State<NewStory> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _educationLevelController =
-  TextEditingController();
+      TextEditingController();
 
-
+  
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -233,9 +233,9 @@ class _NewStoryState extends State<NewStory> {
       'Language': _languageController.text,
       'EducationLevel': eduLevel,
     }).whenComplete(() => {
-      Navigator.pushReplacement(context,
+    Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(documentReference.id,currentStory))),
     });
-
+        
   }
 }

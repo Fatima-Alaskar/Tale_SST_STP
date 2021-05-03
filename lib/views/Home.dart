@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
           width: screenWidth,
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Home.png"),
+                  image: AssetImage("assets/images/home-bg.png"),
                   fit: BoxFit.cover
               )
           ),

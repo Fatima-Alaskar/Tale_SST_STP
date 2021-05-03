@@ -132,8 +132,8 @@ class _StoryDetailsState extends State<StoryDetails> {
   getStoryInfo() {
     FirebaseFirestore.instance
         .collection("UserStory")
-        .doc(currentStory.id)
-        .collection('pages')
+    .doc(currentStory.id)
+    .collection('pages')
         .snapshots()
         .listen((documentSnapshot) => setState((){
 
@@ -157,26 +157,26 @@ class _StoryDetailsState extends State<StoryDetails> {
                   height: 50,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        color: Color(0xFF185366),
-                        child: Center(child: Text(pageNumber.toString(), style: TextStyle(color: Colors.white),)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8,right: 8),
-                        child: Container(child: Text(storyPageText,overflow: TextOverflow.ellipsis,),width: screenWidth - 90,),
-                      )
-                    ],
-                  ),
+                      children: [
+                        Container(
+                          width: 50,
+                          height: 50,
+                          color: Color(0xFF185366),
+                          child: Center(child: Text(pageNumber.toString(), style: TextStyle(color: Colors.white),)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8,right: 8),
+                          child: Container(child: Text(storyPageText,overflow: TextOverflow.ellipsis,),width: screenWidth - 90,),
+                        )
+                      ],
+                    ),
                 ),
               ),
             ),
-            onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (BuildContext context) => StoryPage.userstory(fireBaseDocument.id,currentStory)));
-            },
+                onTap: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (BuildContext context) => StoryPage.userstory(fireBaseDocument.id,currentStory)));
+                },
           );
           storyPageWidgetsList.add(storyPageWidget);
         });

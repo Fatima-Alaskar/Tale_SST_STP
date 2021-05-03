@@ -48,14 +48,14 @@ class _StoryPageState extends State<StoryPage> {
   stt.SpeechToText speech = stt.SpeechToText();
   FlutterTts flutterTts = FlutterTts();
   TtsState ttsState = TtsState.stopped;
-
+  
   _StoryPageState.userstory(String storyID, UserStory currentStory){
     this.storyPageID = storyID;
     this.currentStory = currentStory;
 
     getStoryInfo(); }
-
-
+  
+  
   @override
   Widget build(BuildContext context) {
 
@@ -79,9 +79,9 @@ class _StoryPageState extends State<StoryPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Main Story Content", style: TextStyle(fontSize: 20),),
+                      Text("Main Story Content", style: TextStyle(fontSize: 20),),
 
-                      ],),
+                    ],),
                   ),
                   Divider(color: Colors.grey, height: 3,),
                   SingleChildScrollView(

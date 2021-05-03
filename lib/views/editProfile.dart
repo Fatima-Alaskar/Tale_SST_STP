@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tale_teller/views/ProfilePage.dart';
 
-
-
 import '../Global.dart';
 import 'NavBar.dart';
 
@@ -37,8 +35,6 @@ class _editProfileState extends State<editProfile> {
     user = await _auth.currentUser;
 
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +73,7 @@ class _editProfileState extends State<editProfile> {
                             SizedBox(height: 20,),
 
                             Container(
-
+                              // color: Colors.white,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),color: Colors.white
                               ),
@@ -96,7 +92,9 @@ class _editProfileState extends State<editProfile> {
                                     enabledBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
-
+                                    // enabledBorder: UnderlineInputBorder(
+                                    //   borderSide: BorderSide(color: Colors.white),
+                                    // ),
                                     labelText: 'Username',
 
                                   ),
@@ -164,10 +162,8 @@ class _editProfileState extends State<editProfile> {
                                         disabledBorder: InputBorder.none,
                                         labelText: 'Age',
 
-
                                       ),
-                                      // style: TextStyle(
-                                      //     color: Colors.white, decorationColor: Colors.white),
+
                                       cursorColor: Color(0xFF556036),
                                     ),
                                   ),
@@ -176,7 +172,6 @@ class _editProfileState extends State<editProfile> {
 
                               ],
                             ),
-
                           ],
                         )),
                   )
@@ -204,7 +199,6 @@ class _editProfileState extends State<editProfile> {
                               ),
                                   (route) => false,
                             );
-
                           }
                       ),
                     ),

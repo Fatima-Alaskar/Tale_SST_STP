@@ -7,11 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
 class ViewStory extends StatefulWidget {
- final String id;
+  final String id;
 
 
 
- ViewStory (this.id);
+  ViewStory (this.id);
   @override
   _ViewStoryState createState() => _ViewStoryState( this.id);
 }
@@ -40,42 +40,42 @@ class _ViewStoryState extends State<ViewStory> {
 
   @override
   void initState() {
-  super.initState();
-  loadDocument();
+    super.initState();
+    loadDocument();
 
 
-  super.initState();
+    super.initState();
 
   }
 
   loadDocument() async {
-   await FirebaseFirestore.instance.collection('Story').doc(id.toString()).get().then((value) {
+    await FirebaseFirestore.instance.collection('Story').doc(id.toString()).get().then((value) {
 
-     setState(() {
+      setState(() {
         PDF=value.data()["Story"];
         audio=value.data()["Audio"];
         word=int.parse(value.data()["NumberOfWords"]);
       });
     });
-   document = await PDFDocument.fromURL(
-       PDF);
+    document = await PDFDocument.fromURL(
+        PDF);
     setState(() => _isLoading = false);
-   calScore();
+    calScore();
   }
 
-calScore() async{
+  calScore() async{
     print(word.toString()+"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
-  user = await _auth.currentUser;
-  await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid.toString()).get().then((value){
-    setState(() {
-      count=int.parse(value.data()['Score'].toString());
+    user = await _auth.currentUser;
+    await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid.toString()).get().then((value){
+      setState(() {
+        count=int.parse(value.data()['Score'].toString());
+      });
     });
-  });
     print(count.toString()+"ccccccccccccccccccccccccccccccccccccccc");
     // String w = word+count;
-  await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid).update({'Score': word+count,
-  });
-}
+    await FirebaseFirestore.instance.collection('listeningScore').doc(user.uid).update({'Score': word+count,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,13 +85,13 @@ calScore() async{
       appBar: AppBar(
         backgroundColor: Color(0xFF0DB4EA) ,
         leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text("View Story"),
         actions: [
           IconButton(
-          icon:
+            icon:
             (!player)? Icon(Icons.play_arrow):Icon(Icons.pause),
             onPressed: (
                 ) {
@@ -109,37 +109,37 @@ calScore() async{
         centerTitle: true,
       ),
 
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
 
-                height: screenHeight,
-                width: screenWidth,
+              height: screenHeight,
+              width: screenWidth,
 
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/home-bg.png"),
-                        fit: BoxFit.cover
-                    ),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/home-bg.png"),
+                    fit: BoxFit.cover
                 ),
-                child:
-                Center(
-                    child: _isLoading
-                        ? Center(child: CircularProgressIndicator())
-                        : PDFViewer(document: document)),
+              ),
+              child:
+              Center(
+                  child: _isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : PDFViewer(document: document)),
 
-                          ),
-
-
-
+            ),
 
 
-            ],
 
-          ),
+
+
+          ],
 
         ),
-              ); //}
+
+      ),
+    ); //}
   }
 }

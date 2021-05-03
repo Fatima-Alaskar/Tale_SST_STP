@@ -89,7 +89,7 @@ class _YoungHomeState extends State<YoungHome> {
               ],
             ),
           ),
-          storyWidgetsList.length > 0 ? Stories : Text(" No Stories to display "),
+          storyWidgetsList.length > 0 ? Stories : Text(" Download Stories"),
 
         ],
       ),
@@ -104,77 +104,77 @@ class _YoungHomeState extends State<YoungHome> {
 
       storyWidgetsList = [];
 
-      for(QueryDocumentSnapshot fireBaseDocument in  documentSnapshot.docs){
-        UserStory userstory = new UserStory();
-        userstory.id = fireBaseDocument.id;
-        userstory.title = fireBaseDocument.data()["Title"];
-        userstory.category = fireBaseDocument.data()["Category"];
-        userstory.language = fireBaseDocument.data()["Language"];
-        userstory.educationalLevel = fireBaseDocument.data()["EducationLevel"];
+          for(QueryDocumentSnapshot fireBaseDocument in  documentSnapshot.docs){
+            UserStory userstory = new UserStory();
+            userstory.id = fireBaseDocument.id;
+            userstory.title = fireBaseDocument.data()["Title"];
+            userstory.category = fireBaseDocument.data()["Category"];
+            userstory.language = fireBaseDocument.data()["Language"];
+            userstory.educationalLevel = fireBaseDocument.data()["EducationLevel"];
 
-        setState(() {
-          Widget storyWidget = GestureDetector(
-            child: Card(
-                child: Stack(
-                  children: [
-                    Positioned(
-                      child: Container(
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            userstory.educationalLevel.toString(),
+            setState(() {
+              Widget storyWidget = GestureDetector(
+                child: Card(
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                userstory.educationalLevel.toString(),
+                              ),
+                            ),
                           ),
+                          top: 0,
+                          right: 0,
                         ),
-                      ),
-                      top: 0,
-                      right: 0,
-                    ),
-                    Container(
-                      height: 225,
-                      width: screenWidth,
-                      child: Column(children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: Image.asset("assets/images/story-icon.png" , height: 80,),
-                          ),
+                        Container(
+                          height: 225,
+                          width: screenWidth,
+                          child: Column(children: [
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Image.asset("assets/images/story-icon.png" , height: 80,),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Center(child: Text(userstory.title , overflow: TextOverflow.ellipsis,),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Center(child: Text(userstory.category),),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Text(userstory.language, overflow: TextOverflow.ellipsis, ),
+                            )
+                          ],),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Center(child: Text(userstory.title , overflow: TextOverflow.ellipsis,),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Center(child: Text(userstory.category),),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: Text(userstory.language, overflow: TextOverflow.ellipsis, ),
-                        )
-                      ],),
-                    ),
-                  ],
-                )),
-            onTap: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(userstory.id,userstory)));
-            },
-          );
-          storyWidgetsList.add(storyWidget);
-        });
+                      ],
+                    )),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(userstory.id,userstory)));
+                },
+              );
+              storyWidgetsList.add(storyWidget);
+            });
 
-        // storyList.add(story);
-      }
+            // storyList.add(story);
+          }
 
-      setState(() {
-        Stories = GridView.count(
-          scrollDirection: Axis.vertical,
-          crossAxisCount: 2,
-          shrinkWrap: true,
-          children: storyWidgetsList,
-        );
-      });
+          setState(() {
+            Stories = GridView.count(
+              scrollDirection: Axis.vertical,
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              children: storyWidgetsList,
+            );
+          });
 
     }));
   }
@@ -189,17 +189,17 @@ class _YoungHomeState extends State<YoungHome> {
 
     return Scaffold(
 
-      body: Container(
-        height: screenHeight,
-        width: screenWidth,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/home-bg.png"),
-                fit: BoxFit.cover
-            )
+        body: Container(
+          height: screenHeight,
+          width: screenWidth,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/home-bg.png"),
+                  fit: BoxFit.cover
+              )
+          ),
+          child: _bodyWidget,
         ),
-        child: _bodyWidget,
-      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){

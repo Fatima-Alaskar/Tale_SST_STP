@@ -11,8 +11,8 @@ import '../Global.dart';
 import '../models/Story.dart';
 import 'StoryDetails.dart';
 import 'ViewStory.dart';
-import 'StoryInside.dart';
 import 'SearchStory.dart';
+
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final firestoreInstance = FirebaseFirestore.instance;
 

@@ -57,18 +57,13 @@ class _NavBarState extends State<NavBar> {
             title: new Text('Home'),
           ),
           BottomNavigationBarItem(
-
-            icon: IconButton(
-              icon: Icon(
-                Icons.addchart_rounded,
-              ),
-
-            ),
-            title: new Text("Result"),
+              icon: new Icon(Icons.addchart_rounded),
+              title: new Text("Result"),
+    ),
 
 
 
-          ),
+
         ],
       ),
     );

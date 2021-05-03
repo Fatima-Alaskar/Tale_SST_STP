@@ -22,10 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   double screenWidth;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _educationLevelController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,17 +78,14 @@ class _LoginPageState extends State<LoginPage> {
                                     enabledBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
-
+                                    // ),
                                     labelText: 'Username',
-
                                   ),
-
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
                             ),
                             SizedBox(height: 20,),
-
                             Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(5),color: Colors.white
@@ -111,15 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                                     errorBorder: InputBorder.none,
                                     disabledBorder: InputBorder.none,
                                     labelText: 'Password',
-
                                   ),
-                                  // style: TextStyle(
-                                  //     color: Colors.white, decorationColor: Colors.white),
                                   cursorColor: Color(0xFF556036),
                                 ),
                               ),
                             ),
-
                           ],
                         )),
                   )
@@ -143,8 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                               await _signInWithEmailAndPassword();
 
                             }
-
-
                           }
                       ),
                     ),
@@ -159,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                         width: screenWidth / 3 * 2,
                         height: 50,
                         child: FlatButton(child: Text("Forgot your Password"), onPressed: (){
-
                         }, )
                     ),
                   ),
@@ -200,17 +188,16 @@ class _LoginPageState extends State<LoginPage> {
       final User user = (await Global.auth.signInWithEmailAndPassword(
         email: _usernameController.text + "@taleteller.edu",
         password: _passwordController.text,
-      ))
-          .user;
+      )).user;
 
 
       if(user != null){
 
-
+        // if(user.emailVerified){
         SchedulerBinding.instance.addPostFrameCallback((_) {
 
           Fluttertoast.showToast(
-              msg: "User Login Successful",
+              msg: "Yaay! User Login Successful",
               toastLength: Toast.LENGTH_LONG,
               gravity: ToastGravity.BOTTOM,
               timeInSecForIosWeb: 3,
@@ -231,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
 
       }else{
         Fluttertoast.showToast(
-            msg: "User Not Found",
+            msg: "Ops! User Not Found",
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 3,

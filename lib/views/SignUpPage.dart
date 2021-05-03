@@ -14,7 +14,7 @@ import '../Global.dart';
 import 'Home.dart';
 import 'NavBar.dart';
 
-
+// If a widget can change—when a user interacts with it, for example—it's stateful. A stateless widget never changes. Icon , IconButton , and Text are examples of stateless widgets
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -30,6 +30,10 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _educationLevelController = TextEditingController();
   final collRef = FirebaseFirestore.instance.collection("Userinfo");
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,17 +87,20 @@ class _SignUpPageState extends State<SignUpPage> {
                                   enabledBorder: InputBorder.none,
                                   errorBorder: InputBorder.none,
                                   disabledBorder: InputBorder.none,
-
+                                  // enabledBorder: UnderlineInputBorder(
+                                  //   borderSide: BorderSide(color: Colors.white),
+                                  // ),
                                   labelText: 'Username',
-
+                                  // labelStyle: TextStyle(
+                                  //     color: Colors.white),
                                 ),
-
+                                // style: TextStyle(
+                                //     color: Colors.white, decorationColor: Colors.white),
                                 cursorColor: Color(0xFF556036),
                               ),
                             ),
                           ),
                           SizedBox(height: 20,),
-
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),color: Colors.white
@@ -114,9 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   errorBorder: InputBorder.none,
                                   disabledBorder: InputBorder.none,
                                   labelText: 'Password',
-
                                 ),
-
                                 cursorColor: Color(0xFF556036),
                               ),
                             ),
@@ -148,10 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       errorBorder: InputBorder.none,
                                       disabledBorder: InputBorder.none,
                                       labelText: 'Age',
-
-
                                     ),
-
                                     cursorColor: Color(0xFF556036),
                                   ),
                                 ),
@@ -180,10 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                         errorBorder: InputBorder.none,
                                         disabledBorder: InputBorder.none,
                                         labelText: 'Educational Level',
-
                                       ),
-                                      // style: TextStyle(
-                                      //     color: Colors.white, decorationColor: Colors.white),
                                       cursorColor: Color(0xFF556036),
                                     ),
                                   ),
@@ -191,7 +190,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ],
                           ),
-
                         ],
                       )),
                 )
@@ -214,9 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (_formKey.currentState.validate()) {
                             await _signUpWithEmailAndPassword();
 
-
                           }
-
                         }
                     ),
                   ),
@@ -258,12 +254,10 @@ class _SignUpPageState extends State<SignUpPage> {
       )).user;
 
 
-
-
       if(user != null){
-
+        //create user update object
         user.updateProfile(displayName: _usernameController.text); //set user display name to your variable.
-
+        //update the info
         await user.reload();
         DocumentReference documentReference = collRef.doc(user.uid);
         documentReference.set({
@@ -275,9 +269,7 @@ class _SignUpPageState extends State<SignUpPage> {
           'Score':0,
         });
 
-
         SchedulerBinding.instance.addPostFrameCallback((_) {
-
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -310,7 +302,6 @@ class _SignUpPageState extends State<SignUpPage> {
           textColor: Colors.white,
           fontSize: 16.0
       );
-
     }
   }
 
