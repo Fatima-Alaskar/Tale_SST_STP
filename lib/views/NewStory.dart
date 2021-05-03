@@ -123,7 +123,7 @@ class _NewStoryState extends State<NewStory> {
                                       // obscureText: true,
                                       validator: (String value) {
                                         if (value.isEmpty)
-                                          return 'Ops! Enter language of the story';
+                                          return 'Ops! Enter the language of the story';
                                         return null;
                                       },
                                       decoration: InputDecoration(
@@ -232,7 +232,7 @@ class _NewStoryState extends State<NewStory> {
       'Category': _categoryController.text,
       'Language': _languageController.text,
       'EducationLevel': eduLevel,
-    }).whenComplete(() => {
+    }).whenComplete(() => { //The action function is called when this future completes, whether it does so with a value or with an error.
     Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => StoryDetails.userstory(documentReference.id,currentStory))),
     });

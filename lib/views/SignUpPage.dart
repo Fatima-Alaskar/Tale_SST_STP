@@ -78,7 +78,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               child: TextFormField(
                                 controller: _usernameController,
                                 validator: (String value) {
-                                  if (value.isEmpty) return 'Please enter some text';
+                                  if (value.isEmpty) return 'Please enter username';
                                   return null;
                                 },
                                 decoration: InputDecoration(

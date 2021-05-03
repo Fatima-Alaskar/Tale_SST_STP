@@ -47,11 +47,11 @@ class MyApp extends StatelessWidget {
 
       },
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Tale teller Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Tale teller Demo Home Page'),
     );
   }
 }

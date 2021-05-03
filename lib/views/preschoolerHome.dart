@@ -32,6 +32,7 @@ class _PreShoolerState extends State<PreShooler> {
     super.initState();
     initUser(); }
 
+    //TODO: Need explaination
   initUser() async {
     user = await _auth.currentUser;
     await firestoreInstance.collection("FavoriteList").doc(user?.uid).get().then((value) {

@@ -77,7 +77,7 @@ class _StoryDetailsState extends State<StoryDetails> {
         onPressed: (){
           getOCRData();
         },
-        tooltip: 'Get Text',
+        tooltip: 'Get Text', //long pressed
         child: Icon(Icons.add),
       ),
     );
@@ -108,7 +108,7 @@ class _StoryDetailsState extends State<StoryDetails> {
 
 
     String lineText = "";
-
+      //TODO:
     for (TextBlock block in visionText.blocks) {
       final Rect boundingBox = block.boundingBox;
       final List<Offset> cornerPoints = block.cornerPoints;
@@ -130,21 +130,13 @@ class _StoryDetailsState extends State<StoryDetails> {
 
   }
   getStoryInfo() {
-    FirebaseFirestore.instance
-        .collection("UserStory")
-    .doc(currentStory.id)
-    .collection('pages')
-        .snapshots()
+    FirebaseFirestore.instance.collection("UserStory").doc(currentStory.id).collection('pages').snapshots()
         .listen((documentSnapshot) => setState((){
 
-      int pageNumber = 0;
-
-      storyPageWidgetsList = [];
-
+        int pageNumber = 0;
+        storyPageWidgetsList = [];
       for(QueryDocumentSnapshot fireBaseDocument in  documentSnapshot.docs){
-
         pageNumber++;
-
         String storyPageText = fireBaseDocument.data()["storyPageText"];
 
         setState(() {
